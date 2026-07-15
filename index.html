@@ -1,32 +1,265 @@
 <!DOCTYPE html>
-<html long="ja">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
-    <title>つめつめ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>つめつめぷろじぇくと</title>
+
+    <!-- Googleフォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Awesomeフォント -->
+    
+    <script src="https://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="css/style.css">
-    <link ref="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 
 <body>
-    
-    <header>
-        <h1>株式会社つめつめ</h1>
-
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+    <!-- p5.js 背景 -->
+     
+     <div id="canvas-container"></div>
 
     <main>
+        <header>
+            <div class="logo">
+                <h1><a href="#"><img src="images/つめつめロゴ横.png"></a></h1>
+            </div>
+
+            <nav>
+                <a href="#about">About</a>
+                <a href="#story">Story</a>
+                <a href="#project">project</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
 
         <section class="hero">
-            <h2>Welcome!</h2>
-            <p>サンプル</p>
+            <div class="hero-left">
+                <span class="badge">
+                    Student Startup
+                </span>
+
+                <h2>
+                    なにか<br>
+                    キャッチコピーを
+                </h2>
+                <p>
+                    ちょっとひとこと<br>
+                    日常の小さな困りごとを、
+                    テクノロジーとデザインで解決するため、
+                    現在サービスを開発しています。
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#about" class="button">
+                        About Us
+                    </a>
+                     <a href="#project" class="button">
+                        Our Project
+                    </a>
+                </div>
+            </div>
         </section>
+
+        <section id="about">
+            <div class="section-title">
+                <span>ABOUT</span>
+                <h2>私たちについて</h2>
+            </div>
+
+            <div class="about-container">
+                <div class="about-text">
+                    <p>
+                        なにか
+                    </p>
+                    <p>
+                        私たちは島根大学の学生メンバーで構成された
+                        創業準備中のチームです。
+                    </p>
+                </div>
+                
+            </div>
+
+            <div class="vision-grid">
+                <div class="vision-card">
+                    <h3>Vision</h3>
+                    <p>
+                        なにか
+                    </p>
+                </div>
+
+                <div class="vision-card">
+                    <h3>Mission</h3>
+                    <p>
+                        もくひょう
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="story">
+            <div class="section-title">
+                <h2>Story</h2>
+                <p>ここまでの歩み</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span>2024</span>
+                    <h3>タイトル</h3>
+                    <p>説明</p>
+                </div>
+                <div class="timeline-item">
+                    <span>2025</span>
+                    <h3>タイトル</h3>
+                    <p>説明</p>
+                </div>
+                <div class="timeline-item">
+                    <span>2026</span>
+                    <h3>タイトル</h3>
+                    <p>説明</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="project">
+            <div class="section-title">
+                <h2>Project</h2>
+                <p>現在開発中のサービス</p>
+            </div>
+
+            <div class="project-card">
+                <span class="coming-soon">
+                    Coming Soon
+                </span>
+                <h3>
+                    つめつめ
+                </h3>
+                <p>
+                    現在開発中のサービス
+                </p>
+            </div>
+        </section>
+
+        <section id="team">
+            <div class="section-title">
+                <h2>Team</h2>
+                <p>メンバー紹介</p>
+            </div>
+
+            <div class="member-grid">
+                <div class="member-card">
+                    <!-- 画像を入れる -->
+                     <img src="images/kaisya_desk1_syachou_young_woman.png" alt="代表">
+                     <h3>名前<h3>
+                        <span class="role">
+                            つめつめ代表
+                        </span>
+                        <p>
+                            プロフィールを書く
+                        </p>
+                </div>
+                <div class="member-card">
+                    <!-- 画像を入れる -->
+                     <img src="images/animal_character_suit_w_neko.png" alt="技術責任者">
+                     <h3>名前<h3>
+                        <span class="role">
+                            つめつめ技術責任者
+                        </span>
+                        <p>
+                            プロフィールを書く
+                        </p>
+                </div>
+                <div class="member-card">
+                    <!-- 画像を入れる -->
+                     <img src="images/animal_character_suit_w_kuma.png" alt="経理">
+                     <h3>名前<h3>
+                        <span class="role">
+                            つめつめ経理
+                        </span>
+                        <p>
+                            プロフィールを書く
+                        </p>
+                </div>
+                <div class="member-card">
+                    <!-- 画像を入れる -->
+                     <img src="images/animal_character_suit_m_usagi.png" alt="渉外">
+                     <h3>名前<h3>
+                        <span class="role">
+                            つめつめ渉外
+                        </span>
+                        <p>
+                            プロフィールを書く
+                        </p>
+                </div>
+                <div class="member-card">
+                    <!-- 画像を入れる -->
+                     <img src="images/animal_character_suit_m_inu.png" alt="エンジニア">
+                     <h3>名前<h3>
+                        <span class="role">
+                            つめつめエンジニア
+                        </span>
+                        <p>
+                            プロフィールを書く
+                        </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="media">
+            <div class="section-title">
+                <h2>Media</h2>
+                <p>実績など</p>
+            </div>
+            
+            <div class="media-card">
+                <h3>しまday</h3>
+                <p>せつめい</p>
+                <a href="#">
+                    詳しくみる→
+                </a>
+        </section>
+
+        <section id="sns">
+            <div class="section-title">
+                <h2>SNS</h2>
+                <p>Follow Us</p>
+            </div>
+
+            <div class="sns-links">
+                <a href="#">Instagram</a>
+                <a href="#">X</a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-title">
+                <h2>Contact</h2>
+                <p>お問い合わせ</p>
+            </div>
+
+            <form>
+                <input type="text" placeholder="お名前">
+                <input type="email" placeholder="メールアドレス">
+                <textarea placeholder="お問い合わせ内容"></textarea>
+                <button>送信</button>
+            </form>
+        </section>
+
+        <footer>
+            <h2>つめつめぷろじぇくと</h2>
+            <p>Student Startup Team</p>
+            <small> ちっちゃい文字？</small>
+        </footer>
     </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/sketch.js"></script>
 </body>
 </html>
