@@ -617,7 +617,7 @@ section {
 
 .sns-links a:hover {
     transform: translateY(-8px);
-    background: var(--main);
+    background: var(--pink);
     color: white;
 }
 
