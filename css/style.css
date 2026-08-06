@@ -710,6 +710,43 @@ footer small {
 }
 
 @media(max-width:700px){
+    header{
+        padding: 12px 5%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo img{
+        width: 140px;
+        margin-bottom: 10px;
+    }
+
+    .logo h1{
+        font-size: 1.1rem;
+    }
+
+    nav{
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    nav a{
+        font-size: 0.9rem;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-bottom: 30px;
+        font-weight: 700;
+    }
+
+    #canvas-container {
+        pointer-events: none;
+    }
+
     .timeline{
         padding-left: 25px;
     }
