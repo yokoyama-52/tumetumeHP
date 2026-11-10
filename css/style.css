@@ -1,808 +1,1968 @@
+:root {
+  --ink: #172e55; /* 基本の文字色を変数として定義する。 */
+  --blue: #1765da; /* メインの青系の色を変数として定義する。 */
+  --sky: #dcefff; /* 空をイメージした淡い色を変数として定義する。 */
+  --orange: #ff762f; /* オレンジ系の差し色を変数として定義する。 */
+  --cream: #fff8e8; /* クリーム色を変数として定義する。 */
+  --paper: #fffdf9; /* ページ全体の背景色を変数として定義する。 */
+  --line: rgba(23,46,85,.18); /* 境界線に使う色を変数として定義する。 */
+  --mono: "DM Mono",monospace; /* 等幅の書体を変数として定義する。 */
+  --sans: "Zen Maru Gothic",sans-serif; /* 本文に使う書体を変数として定義する。 */
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box; /* 指定した幅と高さに内余白と枠線を含める。 */
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth; /* スクロール時の移動方法を指定する。 */
 }
 
-body{
-    font-family:'Outfit','Zen Maru Gothic',sans-serif;
-     background: linear-gradient(
-        180deg,
-        #FCFDFF 0%,
-        #F5FBFF 50%,
-        #F9FCFF 100%
-    );
-    color: #444;
-    line-height: 1.8;
-    overflow-x: hidden;
+body {
+  margin: 0; /* 外余白をなくす。 */
+  background: var(--paper); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: var(--ink); /* 文字やアイコンの色を指定する。 */
+  font-family: var(--sans); /* 使う書体を優先順に指定する。 */
+  line-height: 1.8; /* 1行分の高さを指定する。 */
+  overflow-x: hidden; /* 横方向にはみ出す内容の表示方法を指定する。 */
 }
 
-:root{
-
-    --main:#FCFDFF;
-
-    --pink:#00A5FF;
-
-    --light:#EAF8FF;
-
-    --sun: #fcfcd8;
-
-    --text:#444;
-
-    --gray:#777;
-
-    --white:#fff;
-
+a {
+  color: inherit; /* 文字やアイコンの色を指定する。 */
 }
 
-header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 20px 8%;
-
-    background: rgba(255,255,255,.65);
-    backdrop-filter: blur(16px);
-
-    transition: .4s;
+h1,h2,h3,p {
+  margin-top: 0; /* 要素の上側の外余白を指定する。 */
 }
 
-.logo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.section-shell {
+  width: min(1140px,calc(100% - 64px)); /* 要素の幅を指定する。 */
+  margin-inline: auto; /* 要素の左右の外余白を指定する。 */
 }
 
-.logo h1{
-    font-size: 1.4rem;
-    font-weight: 700;
+.sr-only {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  width: 1px; /* 要素の幅を指定する。 */
+  height: 1px; /* 要素の高さを指定する。 */
+  overflow: hidden; /* 枠からはみ出す部分を隠す。 */
+  clip: rect(0,0,0,0); /* 表示する範囲を切り抜く。 */
 }
 
-.logo img{
-    width:200px;
-    height:auto;
-    display:block;
-    margin:0 auto 25px;
+.site-header {
+  position: sticky; /* スクロール中、指定した位置で要素を留める。 */
+  top: 0; /* 上端からの位置を指定する。 */
+  z-index: 20; /* 重なった要素の前後関係を指定する。 */
+  height: 82px; /* 要素の高さを指定する。 */
+  padding: 0 max(32px,calc((100vw - 1140px)/2)); /* 要素の内側の余白を指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  justify-content: space-between; /* 主軸方向の並び方と余白の配分を指定する。 */
+  background: rgba(255,253,249,.86); /* 背景色・画像・グラデーションなどを指定する。 */
+  backdrop-filter: blur(16px); /* 要素の背後に見える背景に効果をかける。 */
+  border-bottom: 1px solid transparent; /* 下側の枠線を指定する。 */
+  transition: .25s; /* スタイルの変化を滑らかにする。 */
 }
 
-nav {
-    display: flex;
-    gap: 35px;
+.site-header.scrolled {
+  border-color: var(--line); /* 枠線の色を指定する。 */
 }
 
-nav a{
-    text-decoration: none;
-    color: #555;
-    font-size: .95rem;
-    transition: .3s;
-    position: relative;
+.brand {
+  display: block; /* 要素を独立したブロックとして表示する。 */
+  line-height: 0; /* 1行分の高さを指定する。 */
 }
 
-nav a::after {
-    content: "";
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--main);
-    transition: .3s;
+.brand img {
+  width: 168px; /* 要素の幅を指定する。 */
+  height: auto; /* 幅や内容に応じて高さを自動で決める。 */
 }
 
-nav a:hover {
-    color:ver(--main);
+.site-nav {
+  display: flex; /* 子要素を横または縦に並べる。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  gap: 26px; /* 子要素同士の間隔を指定する。 */
 }
 
-nav a:hover::after {
-    width: 100%;
+.site-nav a {
+  font-family: var(--mono); /* 使う書体を優先順に指定する。 */
+  font-size: 12px; /* 文字の大きさを指定する。 */
+  text-decoration: none; /* 下線など文字の装飾を指定する。 */
+  letter-spacing: .04em; /* 文字同士の間隔を指定する。 */
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
 }
 
-.hero{
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 60px;
-    padding: 120px 10% 80px;
+.site-nav a:after {
+  content: ""; /* 装飾用の空の疑似要素を作る。 */
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  bottom: -8px; /* 下端からの位置を指定する。 */
+  left: 0; /* 左端からの位置を指定する。 */
+  width: 0; /* 要素の幅を指定する。 */
+  height: 2px; /* 要素の高さを指定する。 */
+  background: var(--orange); /* 背景色・画像・グラデーションなどを指定する。 */
+  transition: .25s; /* スタイルの変化を滑らかにする。 */
 }
 
-.hero-left {
-    z-index: 5;
+.site-nav a:hover:after,.site-nav .active:after {
+  width: 100%; /* 要素の幅を指定する。 */
 }
 
-.hero h2 {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    margin-bottom: 30px;
-    font-weight: 700;
+.menu-button {
+  display: none; /* 要素を非表示にし、レイアウト上の場所も取らない。 */
 }
 
-.hero h2 span {
-    color: var(--main);
-}
-
-.hero p {
-    max-width: 500px;
-    color: #666;
-    font-size: 1.05rem;
-    margin-bottom: 40px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 18px;
-}
-
-.hero-right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#canvas-container {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.badge {
-    display: inline-block;
-    padding: 8px 18px;
-    border-radius: 999px;
-    background: var(--pink);
-    color: var(--main);
-    font-size: .85rem;
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-
-.card {
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,.1);
-    transition: .3s;
-}
-
-.card:hover {
-    transform: translateY(-8px);
+.eyebrow {
+  font: 500 12px/1.3 var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  letter-spacing: .11em; /* 文字同士の間隔を指定する。 */
+  color: var(--blue); /* 文字やアイコンの色を指定する。 */
+  margin-bottom: 19px; /* 要素の下側の外余白を指定する。 */
 }
 
 .button {
-    display: inline-block;
-    background: linear-gradient(
-        135deg,
-        var(--main),
-        var(--pink)
-    );
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: .35s;
-    border-radius: 999px;
-    padding: 16px 36px;
-    box-shadow: 0 10px 30px rgba(126, 124, 255, 0.25);
+  display: inline-flex; /* 要素の表示方法と子要素の配置方式を指定する。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  gap: 28px; /* 子要素同士の間隔を指定する。 */
+  padding: 14px 20px 14px 24px; /* 要素の内側の余白を指定する。 */
+  border-radius: 999px; /* 角の丸みを指定する。 */
+  background: var(--ink); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: #fff; /* 文字やアイコンの色を指定する。 */
+  text-decoration: none; /* 下線など文字の装飾を指定する。 */
+  font-weight: 700; /* 文字の太さを指定する。 */
+  transition: transform .2s,background .2s; /* スタイルの変化を滑らかにする。 */
 }
 
 .button:hover {
-    transform: translateY(-6px);
+  transform: translateY(-3px); /* 移動、回転、拡大縮小などを適用する。 */
+  background: var(--orange); /* 背景色・画像・グラデーションなどを指定する。 */
 }
 
-.button-outline{
-    background: white;
-    color: var(--main);
-    border: 2px solid var(--main);
-    box-shadow: none;
+.button span,.arrow-link span {
+  font: 20px/1 var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
 }
 
-
-/* ---Section--- */
-
-section {
-    padding: 120px 10%;
+.text-link,.arrow-link {
+  font-weight: 700; /* 文字の太さを指定する。 */
+  text-decoration: none; /* 下線など文字の装飾を指定する。 */
+  display: inline-flex; /* 要素の表示方法と子要素の配置方式を指定する。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  gap: 11px; /* 子要素同士の間隔を指定する。 */
 }
 
-.section-title {
-    margin-bottom: 70px;
+.text-link {
+  padding: 12px; /* 要素の内側の余白を指定する。 */
 }
 
-.section-title span {
-    color: var(--pink);
-    font-size: .86rem;
-    letter-spacing: 3px;
-    font-weight: 700;
+.arrow-link {
+  border-bottom: 2px solid var(--ink); /* 下側の枠線を指定する。 */
+  padding-bottom: 8px; /* 要素の下側の内余白を指定する。 */
 }
 
-.section-title h2 {
-    font-size: 2.8rem;
-    margin-top: 10px;
+.hero {
+  min-height: calc(100vh - 82px); /* 要素の高さの下限を指定する。 */
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: 1.05fr .95fr; /* グリッドの列数と各列の幅を指定する。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  gap: 30px; /* 子要素同士の間隔を指定する。 */
+  padding-block: 70px 110px; /* 要素の上下の内余白を指定する。 */
 }
 
-.about-container {
-    display: grid;
-    grid-template-columns: 1.2fr .8fr;
-    gap: 60px;
-    align-items: start;
+.hero-copy {
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+  z-index: 2; /* 重なった要素の前後関係を指定する。 */
 }
 
-.about-text p {
-    margin-bottom: 25px;
-    color: #666;
-    font-size: 1.05rem;
+.hero h1,.page-hero h1 {
+  font-size: clamp(38px,5vw,70px); /* 文字の大きさを指定する。 */
+  line-height: 1.28; /* 1行分の高さを指定する。 */
+  letter-spacing: -.06em; /* 文字同士の間隔を指定する。 */
+  margin-bottom: 25px; /* 要素の下側の外余白を指定する。 */
 }
 
-.vision-grid{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+.hero h1 em,.page-hero h1 em {
+  color: var(--orange); /* 文字やアイコンの色を指定する。 */
+  font-style: normal; /* 斜体など文字のスタイルを指定する。 */
 }
 
-.vision-card {
-    background: white;
-    border-radius: 28px;
-    padding: 35px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.06);
-    transition: .35ox;
+.lead {
+  max-width: 510px; /* 要素が広がる幅の上限を指定する。 */
+  font-size: 16px; /* 文字の大きさを指定する。 */
 }
 
-.vision-card:hover {
-    transform: translateY(-8px);
+.button-row {
+  display: flex; /* 子要素を横または縦に並べる。 */
+  gap: 15px; /* 子要素同士の間隔を指定する。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  margin-top: 32px; /* 要素の上側の外余白を指定する。 */
 }
 
-.vision-card h3 {
-    color: var(--pink);
-    margin-bottom: 15px;
+.hero-art {
+  height: 470px; /* 要素の高さを指定する。 */
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
 }
 
-.vision-card p {
-    color: #666;
+.hero-logo {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  width: min(360px,80%); /* 要素の幅を指定する。 */
+  top: 37px; /* 上端からの位置を指定する。 */
+  left: 50%; /* 左端からの位置を指定する。 */
+  transform: translateX(-50%) rotate(-9deg); /* 移動、回転、拡大縮小などを適用する。 */
+  filter: drop-shadow(0 20px 24px rgba(23,46,85,.13)); /* 要素そのものにぼかしや色の効果をかける。 */
+  animation: float 5s ease-in-out infinite; /* アニメーション名、時間、繰り返しなどを指定する。 */
 }
 
-
-/* ---Story--- */
-
-#story {
-    position: relative;
-    background: linear-gradient(
-        180deg,
-        #FCFDFF 0%,
-        #F3FBFF 100%
-    );
-    overflow: hidden;
+.orbit {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  border: 2px solid var(--blue); /* 枠線の太さ、種類、色を指定する。 */
+  border-radius: 50%; /* 角の丸みを指定する。 */
 }
 
-#story::before {
-    content: "";
-    position: absolute;
-    width: 380px;
-    height: 380px;
-    border-radius: 50%;
-    background: rgba(177,124,255,.08);
-    top: -120px;
-    right: -100px;
-    filter: blur(30px);
+.orbit-a {
+  width: 390px; /* 要素の幅を指定する。 */
+  height: 160px; /* 要素の高さを指定する。 */
+  top: 150px; /* 上端からの位置を指定する。 */
+  left: 30px; /* 左端からの位置を指定する。 */
+  transform: rotate(-26deg); /* 移動、回転、拡大縮小などを適用する。 */
 }
 
-#story::after {
-    content: "";
-    position: absolute;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: rgba(248,180,217,.10);
-    bottom: -80px;
-    left: -80px;
-    filter: blur(25px);
+.orbit-b {
+  width: 300px; /* 要素の幅を指定する。 */
+  height: 400px; /* 要素の高さを指定する。 */
+  top: 25px; /* 上端からの位置を指定する。 */
+  left: 120px; /* 左端からの位置を指定する。 */
+  border-color: var(--orange); /* 枠線の色を指定する。 */
+  transform: rotate(29deg); /* 移動、回転、拡大縮小などを適用する。 */
 }
 
-/* ---timeline--- */
-
-.timeline {
-    position: relative;
-    max-width: 900px;
-
-    margin: 0 auto;
-    padding-left: 40px;
+.sticker {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  z-index: 1; /* 重なった要素の前後関係を指定する。 */
 }
 
-.timeline::before {
-    content: "";
-    position: absolute;
-    left: 18px;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(
-        to bottom,
-        var(--main),
-        var(--pink)
-    );
+.sticker-star {
+  right: 5%; /* 右端からの位置を指定する。 */
+  top: 16%; /* 上端からの位置を指定する。 */
+  font-size: 58px; /* 文字の大きさを指定する。 */
+  color: var(--orange); /* 文字やアイコンの色を指定する。 */
+  animation: spin 7s linear infinite; /* アニメーション名、時間、繰り返しなどを指定する。 */
 }
 
-.timeline-item {
-    position: relative;
-    margin-bottom: 70px;
-    padding: 28px 35px;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 18px 45px rgba(0,0,0,.06);
-    transition: .35s;
+.sticker-dot {
+  width: 32px; /* 要素の幅を指定する。 */
+  height: 32px; /* 要素の高さを指定する。 */
+  border-radius: 50%; /* 角の丸みを指定する。 */
+  left: 7%; /* 左端からの位置を指定する。 */
+  bottom: 12%; /* 下端からの位置を指定する。 */
+  background: var(--blue); /* 背景色・画像・グラデーションなどを指定する。 */
 }
 
-.timeline-item:last-child {
-    margin-bottom: 0;
+.art-note {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  right: 4%; /* 右端からの位置を指定する。 */
+  bottom: 9%; /* 下端からの位置を指定する。 */
+  font: 500 14px/1.1 var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  transform: rotate(-9deg); /* 移動、回転、拡大縮小などを適用する。 */
 }
 
-/* ---丸--- */
-.timeline-item::before{
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--main);
-    border: 5px solid white;
-    left: -48px;
-    top: 38px;
-    box-shadow: 0 0 0 4px rgba(124, 139, 255, 0.15);
+.scroll-cue {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  left: 0; /* 左端からの位置を指定する。 */
+  bottom: 34px; /* 下端からの位置を指定する。 */
+  font: 500 11px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  letter-spacing: .1em; /* 文字同士の間隔を指定する。 */
+  text-decoration: none; /* 下線など文字の装飾を指定する。 */
 }
 
-.timeline:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 28px 60ox rgba(124, 157, 255, 0.15);
+.scroll-cue span {
+  color: var(--orange); /* 文字やアイコンの色を指定する。 */
+  font-size: 20px; /* 文字の大きさを指定する。 */
+  margin-left: 9px; /* 要素の左側の外余白を指定する。 */
 }
 
-.timeline-item span {
-    display: inline-block;
-    margin-bottom: 14px;
-    padding: 6px 16px;
-    border-radius: 999px;
-    background: var(--light);
-    color: var(--pink);
-    font-size: .85rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+.intro-block {
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: 1fr .76fr; /* グリッドの列数と各列の幅を指定する。 */
+  gap: 11%; /* 子要素同士の間隔を指定する。 */
+  padding: 120px 0; /* 要素の内側の余白を指定する。 */
 }
 
-.timeline h3 {
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-    color: #333;
+.intro-block h2,.section-heading h2,.contact-cta h2,.about-closing h2 {
+  font-size: clamp(32px,4vw,54px); /* 文字の大きさを指定する。 */
+  line-height: 1.36; /* 1行分の高さを指定する。 */
+  letter-spacing: -.05em; /* 文字同士の間隔を指定する。 */
 }
 
-.timeline-item p {
-    color: #666;
-    line-height: 1.9;
+.intro-text {
+  padding-top: 57px; /* 要素の上側の内余白を指定する。 */
 }
 
-/* ---project--- */
-#project {
-    background: linear-gradient(
-        180deg,
-        #FCFDFF 0%,
-        var(--main) 100%
-    );
-    position: relative;
+.intro-text p {
+  font-size: 17px; /* 文字の大きさを指定する。 */
+  margin-bottom: 35px; /* 要素の下側の外余白を指定する。 */
 }
 
-.project-card {
-    max-width: 900px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 32px;
-    padding: 60px;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,.08);
-    transition: .35s;
-    position: relative;
+.process-section {
+  background: var(--ink); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: #fff; /* 文字やアイコンの色を指定する。 */
+  padding: 110px 0; /* 要素の内側の余白を指定する。 */
 }
 
-.project-card::before {
-    content: "";
-    position: absolute;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: rgba(177,124,255,.08);
-    right: -120px;
-    top: -120px;
+.process-section .eyebrow {
+  color: #9ac6ff; /* 文字やアイコンの色を指定する。 */
 }
 
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 35px 80px rgba(177,124,255,.018);
+.section-heading {
+  max-width: 590px; /* 要素が広がる幅の上限を指定する。 */
 }
 
-.coming-soon {
-    display: inline-block;
-    padding: 8px 20px;
-    border-radius: 999px;
-    background: var(--light);
-    color: var(--pink);
-    font-size: .9rem;
-    font-weight: 700;
-    margin-bottom: 25px;
+.section-heading>p:not(.eyebrow) {
+  color: inherit; /* 文字やアイコンの色を指定する。 */
+  opacity: .72; /* 要素全体の不透明度を指定する。 */
 }
 
-.project-card h3 {
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-    color: #333;
+.process-list {
+  padding: 0; /* 内余白をなくす。 */
+  margin: 68px 0 0; /* 要素の外側の余白を指定する。 */
+  list-style: none; /* リストの標準マーカーを非表示にする。 */
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: repeat(3,1fr); /* グリッドの列数と各列の幅を指定する。 */
+  gap: 1px; /* 子要素同士の間隔を指定する。 */
+  background: rgba(255,255,255,.27); /* 背景色・画像・グラデーションなどを指定する。 */
 }
 
-.project-card p{
-    max-width: 600px;
-    margin: auto;
-    color: #666;
-    line-height: 1.9;
-    font-size: .01rem;
+.process-list li {
+  background: var(--ink); /* 背景色・画像・グラデーションなどを指定する。 */
+  padding: 29px 27px; /* 要素の内側の余白を指定する。 */
 }
 
-/* ---team--- */
-#team {
-    background: linear-gradient(
-        180deg,
-        #fff,
-        var(--light)
-    );
+.process-list span {
+  font: 500 13px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  color: #ffb290; /* 文字やアイコンの色を指定する。 */
+}
+
+.process-list h3 {
+  font-size: 22px; /* 文字の大きさを指定する。 */
+  margin: 35px 0 12px; /* 要素の外側の余白を指定する。 */
+}
+
+.process-list p {
+  font-size: 14px; /* 文字の大きさを指定する。 */
+  opacity: .73; /* 要素全体の不透明度を指定する。 */
+  margin: 0; /* 外余白をなくす。 */
+}
+
+.works-teaser {
+  padding: 130px 0; /* 要素の内側の余白を指定する。 */
+}
+
+.work-grid {
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: 1.05fr .95fr .95fr; /* グリッドの列数と各列の幅を指定する。 */
+  gap: 18px; /* 子要素同士の間隔を指定する。 */
+  margin-top: 58px; /* 要素の上側の外余白を指定する。 */
+}
+
+.work-card {
+  min-height: 320px; /* 要素の高さの下限を指定する。 */
+  border-radius: 12px; /* 角の丸みを指定する。 */
+  padding: 27px; /* 要素の内側の余白を指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  flex-direction: column; /* 子要素を並べる方向を指定する。 */
+  transition: transform .25s; /* スタイルの変化を滑らかにする。 */
+}
+
+.work-card:hover {
+  transform: translateY(-8px); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.orange {
+  background: var(--orange); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: #fff; /* 文字やアイコンの色を指定する。 */
+}
+
+.blue {
+  background: var(--blue); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: #fff; /* 文字やアイコンの色を指定する。 */
+}
+
+.cream {
+  background: #ffefbf; /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.work-number,.project-label {
+  font: 500 11px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  letter-spacing: .08em; /* 文字同士の間隔を指定する。 */
+}
+
+.work-card h3 {
+  font-size: 28px; /* 文字の大きさを指定する。 */
+  margin: 65px 0 11px; /* 要素の外側の余白を指定する。 */
+}
+
+.work-card p {
+  font-size: 14px; /* 文字の大きさを指定する。 */
+  line-height: 1.75; /* 1行分の高さを指定する。 */
+}
+
+.work-card>span {
+  margin-top: auto; /* 要素の上側の外余白を指定する。 */
+  font: 500 10px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  letter-spacing: .09em; /* 文字同士の間隔を指定する。 */
+}
+
+.activity-banner {
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+  background: var(--sky); /* 背景色・画像・グラデーションなどを指定する。 */
+  overflow: hidden; /* 枠からはみ出す部分を隠す。 */
+  padding: 100px 0; /* 要素の内側の余白を指定する。 */
+}
+
+.activity-banner .section-shell {
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+}
+
+.activity-banner h2 {
+  font-size: clamp(35px,5vw,60px); /* 文字の大きさを指定する。 */
+  line-height: 1.35; /* 1行分の高さを指定する。 */
+  letter-spacing: -.06em; /* 文字同士の間隔を指定する。 */
+  margin-bottom: 18px; /* 要素の下側の外余白を指定する。 */
+}
+
+.activity-banner>div>p:not(.eyebrow) {
+  max-width: 470px; /* 要素が広がる幅の上限を指定する。 */
+}
+
+.activity-stamp {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  right: 8%; /* 右端からの位置を指定する。 */
+  bottom: -38px; /* 下端からの位置を指定する。 */
+  width: 188px; /* 要素の幅を指定する。 */
+  height: 188px; /* 要素の高さを指定する。 */
+  background: var(--orange); /* 背景色・画像・グラデーションなどを指定する。 */
+  border-radius: 50%; /* 角の丸みを指定する。 */
+  display: grid; /* 子要素を行と列で配置する。 */
+  place-content: center; /* 子要素の配置を両軸まとめて指定する。 */
+  text-align: center; /* 文字を左・中央・右などにそろえる。 */
+  color: #fff; /* 文字やアイコンの色を指定する。 */
+  font: 500 20px/1.1 var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  transform: rotate(14deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.contact-cta {
+  padding: 130px 0; /* 要素の内側の余白を指定する。 */
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: 1fr .65fr; /* グリッドの列数と各列の幅を指定する。 */
+  gap: 9%; /* 子要素同士の間隔を指定する。 */
+  align-items: end; /* 子要素を交差軸方向にそろえる。 */
+}
+
+.contact-cta div>p {
+  margin-bottom: 28px; /* 要素の下側の外余白を指定する。 */
+}
+
+.page-hero {
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+  padding-top: 110px; /* 要素の上側の内余白を指定する。 */
+  padding-bottom: 105px; /* 要素の下側の内余白を指定する。 */
+  min-height: 420px; /* 要素の高さの下限を指定する。 */
+}
+
+.page-hero>p:not(.eyebrow) {
+  max-width: 590px; /* 要素が広がる幅の上限を指定する。 */
+  font-size: 17px; /* 文字の大きさを指定する。 */
+}
+
+.page-hero-mark {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  width: 250px; /* 要素の幅を指定する。 */
+  right: 5%; /* 右端からの位置を指定する。 */
+  top: 55px; /* 上端からの位置を指定する。 */
+  opacity: .14; /* 要素全体の不透明度を指定する。 */
+  transform: rotate(17deg); /* 移動、回転、拡大縮小などを適用する。 */
+  pointer-events: none; /* マウス操作の対象になるか指定する。 */
+}
+
+.manifesto {
+  padding-bottom: 120px; /* 要素の下側の内余白を指定する。 */
+}
+
+.manifesto-item {
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: 1fr .8fr; /* グリッドの列数と各列の幅を指定する。 */
+  gap: 14%; /* 子要素同士の間隔を指定する。 */
+  padding: 58px 0; /* 要素の内側の余白を指定する。 */
+  border-top: 1px solid var(--line); /* 上側の枠線を指定する。 */
+}
+
+.manifesto-item:last-child {
+  border-bottom: 1px solid var(--line); /* 下側の枠線を指定する。 */
+}
+
+.manifesto-item h2 {
+  font-size: clamp(27px,3.3vw,44px); /* 文字の大きさを指定する。 */
+  line-height: 1.43; /* 1行分の高さを指定する。 */
+  letter-spacing: -.05em; /* 文字同士の間隔を指定する。 */
+}
+
+.manifesto-item>p {
+  padding-top: 31px; /* 要素の上側の内余白を指定する。 */
+}
+
+.manifesto small {
+  display: inline-block; /* 文章と同じ行に置きながら、幅や余白を指定できるようにする。 */
+  margin-top: 13px; /* 要素の上側の外余白を指定する。 */
+  color: #69758b; /* 文字やアイコンの色を指定する。 */
+}
+
+.about-closing {
+  background: var(--orange); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: #fff; /* 文字やアイコンの色を指定する。 */
+  padding: 105px 0; /* 要素の内側の余白を指定する。 */
+}
+
+.about-closing .eyebrow {
+  color: #fff; /* 文字やアイコンの色を指定する。 */
+}
+
+.about-closing h2 {
+  margin-bottom: 17px; /* 要素の下側の外余白を指定する。 */
+}
+
+.project-list {
+  padding-bottom: 120px; /* 要素の下側の内余白を指定する。 */
+  display: grid; /* 子要素を行と列で配置する。 */
+  gap: 25px; /* 子要素同士の間隔を指定する。 */
+}
+
+.project-detail {
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: 130px 1fr .95fr; /* グリッドの列数と各列の幅を指定する。 */
+  gap: 28px; /* 子要素同士の間隔を指定する。 */
+  padding: 39px; /* 要素の内側の余白を指定する。 */
+  border-radius: 14px; /* 角の丸みを指定する。 */
+}
+
+.project-detail h2 {
+  font-size: 31px; /* 文字の大きさを指定する。 */
+  margin: 4px 0 12px; /* 要素の外側の余白を指定する。 */
+}
+
+.project-detail>div:nth-child(2)>p:not(.eyebrow) {
+  font-size: 14px; /* 文字の大きさを指定する。 */
+}
+
+.project-detail dl {
+  margin: 0; /* 外余白をなくす。 */
+  align-self: end; /* この要素だけ交差軸方向のそろえ方を変える。 */
+}
+
+.project-detail dl div {
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: 110px 1fr; /* グリッドの列数と各列の幅を指定する。 */
+  gap: 10px; /* 子要素同士の間隔を指定する。 */
+  border-top: 1px solid currentColor; /* 上側の枠線を指定する。 */
+  padding: 10px 0; /* 要素の内側の余白を指定する。 */
+  font-size: 13px; /* 文字の大きさを指定する。 */
+}
+
+.project-detail dt {
+  font-weight: 700; /* 文字の太さを指定する。 */
+}
+
+.project-detail dd {
+  margin: 0; /* 外余白をなくす。 */
 }
 
 .member-grid {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 35px;
+  padding-bottom: 120px; /* 要素の下側の内余白を指定する。 */
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: repeat(3,1fr); /* グリッドの列数と各列の幅を指定する。 */
+  gap: 22px; /* 子要素同士の間隔を指定する。 */
 }
 
 .member-card {
-    background: white;
-    border-radius: 30px;
-    padding: 40px 30px;
-    text-align: center;
-    box-shadow: 0 18px 45px rgba(0,0,0,.07);
-    transition: .35s;
+  padding: 20px; /* 要素の内側の余白を指定する。 */
+  background: #fff; /* 背景色・画像・グラデーションなどを指定する。 */
+  border: 1px solid var(--line); /* 枠線の太さ、種類、色を指定する。 */
+  border-radius: 12px; /* 角の丸みを指定する。 */
 }
 
-.member-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 30px 70px rgba(124, 165, 255, 0.015);
+.member-image {
+  height: 255px; /* 要素の高さを指定する。 */
+  background: var(--sky); /* 背景色・画像・グラデーションなどを指定する。 */
+  border-radius: 8px; /* 角の丸みを指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  align-items: flex-end; /* 子要素を交差軸方向にそろえる。 */
+  justify-content: center; /* 主軸方向の並び方と余白の配分を指定する。 */
+  overflow: hidden; /* 枠からはみ出す部分を隠す。 */
+  margin-bottom: 19px; /* 要素の下側の外余白を指定する。 */
 }
 
-.member-card img{
-    width:180px;
-    aspect-ratio:1 / 1;
-    object-fit:cover;
-    display:block;
-    border-radius:24px;
-    margin:0 auto 25px;
-    border:6px solid var(--light);
+.member-image img {
+  height: 93%; /* 要素の高さを指定する。 */
+  width: auto; /* 要素の幅を指定する。 */
+  max-width: 94%; /* 要素が広がる幅の上限を指定する。 */
+  object-fit: contain; /* 画像を表示枠にどう収めるか指定する。 */
 }
 
-.member-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-    color: #333;
+.member-image.photo {
+  align-items: stretch; /* 子要素を交差軸方向にそろえる。 */
 }
 
-.member-card .role {
-    display: inline-block;
-    margin-bottom: 18px;
-    color: var(--pink);
-    font-weight: 600;
-    font-size: .95rem;
+.member-image.photo img {
+  width: 100%; /* 要素の幅を指定する。 */
+  height: 100%; /* 要素の高さを指定する。 */
+  max-width: none; /* 要素が広がる幅の上限を指定する。 */
+  object-fit: cover; /* 画像を表示枠にどう収めるか指定する。 */
 }
 
-.member-card p {
-    color: #666;
-    line-height: 1.8;
+.member-role,.member-field {
+  font: 500 11px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  letter-spacing: .06em; /* 文字同士の間隔を指定する。 */
 }
 
-.member-social {
-    margin-top: 25px;
-    display: flex;
-    justify-content: center;
-    gap: 18px;
+.member-role {
+  color: var(--orange); /* 文字やアイコンの色を指定する。 */
+  margin-bottom: 4px; /* 要素の下側の外余白を指定する。 */
 }
 
-.member-social a {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #eff4ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: var(--main);
-    transition: .3s;
+.member-card h2 {
+  font-size: 22px; /* 文字の大きさを指定する。 */
+  margin-bottom: 2px; /* 要素の下側の外余白を指定する。 */
 }
 
-.member-social:hover {
-    background: var(--main);
-    color: white;
+.member-field {
+  color: var(--blue); /* 文字やアイコンの色を指定する。 */
+  margin-bottom: 18px; /* 要素の下側の外余白を指定する。 */
 }
 
-/* ---media--- */
-#media {
-    background: linear-gradient(
-        180deg,
-        var(--light),
-        var(--white)
-        
-    );
+.member-card>p:last-child {
+  font-size: 13px; /* 文字の大きさを指定する。 */
+  line-height: 1.7; /* 1行分の高さを指定する。 */
+  margin-bottom: 0; /* 要素の下側の外余白を指定する。 */
 }
 
-.media-card {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px;
-    border-radius: 28px;
-    background: white;
-    box-shadow: 0 18px 45px rgba(0,0,0,.07);
-    transition: .35s;
-}
-.media-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 30px 70px rgba(124, 146, 255, 0.15);
+.contact-options {
+  padding-bottom: 100px; /* 要素の下側の内余白を指定する。 */
 }
 
-.media-card h3 {
-    font-size: 1.6rem;
-    margin-bottom: 15px;
-    color: #333;
+.contact-option {
+  border-top: 1px solid var(--line); /* 上側の枠線を指定する。 */
+  padding: 30px 10px; /* 要素の内側の余白を指定する。 */
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: 90px 1fr 35px; /* グリッドの列数と各列の幅を指定する。 */
+  gap: 20px; /* 子要素同士の間隔を指定する。 */
+  text-decoration: none; /* 下線など文字の装飾を指定する。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  transition: .2s; /* スタイルの変化を滑らかにする。 */
 }
 
-.media-card p {
-    color: #666;
-    margin-bottom: 25px;
-    line-height: 1.8;
+.contact-option:last-child {
+  border-bottom: 1px solid var(--line); /* 下側の枠線を指定する。 */
 }
 
-.media-card a {
-    display: inline-block;
-    color: var(--main);
-    text-decoration: none;
-    font-weight: 600;
-    transition: .3s;
+.contact-option:hover {
+  background: var(--sky); /* 背景色・画像・グラデーションなどを指定する。 */
+  padding-inline: 24px; /* 要素の左右の内余白を指定する。 */
 }
 
-.media-card a:hover {
-    transform: translateY(6px);
+.contact-option>span {
+  font: 500 12px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  color: var(--orange); /* 文字やアイコンの色を指定する。 */
 }
 
-/* ---sns--- */
-#sns {
-    background: linear-gradient(
-        180deg,
-        var(--white),
-        var(--sun)
-    );
+.contact-option h2 {
+  font-size: 24px; /* 文字の大きさを指定する。 */
+  margin: 0; /* 外余白をなくす。 */
 }
 
-.sns-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 25px;
+.contact-option p {
+  font-size: 13px; /* 文字の大きさを指定する。 */
+  margin: 3px 0 0; /* 要素の外側の余白を指定する。 */
 }
 
-.sns-links a {
-    width: 180px;
-    height: 65px;
-    border-radius: 20px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: #444;
-    font-weight: 600;
-    box-shadow: 0 15ox 35px rgba(0,0,0,.06);
-    transition: .35s;
+.contact-option b {
+  font-size: 26px; /* 文字の大きさを指定する。 */
 }
 
-.sns-links a:hover {
-    transform: translateY(-8px);
-    background: var(--pink);
-    color: white;
+.contact-note {
+  background: var(--cream); /* 背景色・画像・グラデーションなどを指定する。 */
+  padding: 80px max(32px,calc((100vw - 1140px)/2)); /* 要素の内側の余白を指定する。 */
 }
 
-/* ---contact--- */
-#contact {
-    background: linear-gradient(
-        180deg,
-        var(--sun),
-        var(--white)
-    );
+.contact-note>div {
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: 1fr 1fr; /* グリッドの列数と各列の幅を指定する。 */
+  gap: 8%; /* 子要素同士の間隔を指定する。 */
+  margin-top: 28px; /* 要素の上側の外余白を指定する。 */
 }
 
-form {
-    max-width: 750px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+.contact-note h2 {
+  font-size: clamp(28px,3.8vw,45px); /* 文字の大きさを指定する。 */
+  line-height: 1.45; /* 1行分の高さを指定する。 */
 }
 
-form input,form textarea {
-    width: 100%;
-    padding: 18px 24px;
-    border: none;
-    border-radius: 18px;
-    background: #fffaf0;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: .3s;
+.contact-note ul {
+  margin: 0; /* 外余白をなくす。 */
+  padding: 4px 0 0; /* 要素の内側の余白を指定する。 */
+  list-style: none; /* リストの標準マーカーを非表示にする。 */
 }
 
-form textarea {
-    min-height: 180px;
-    resize: vertical;
+.contact-note li {
+  padding: 10px 0; /* 要素の内側の余白を指定する。 */
+  border-bottom: 1px solid var(--line); /* 下側の枠線を指定する。 */
 }
 
-form input:focus,form textarea:focus {
-    outline: none;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(255, 251, 124, 0.18);
+.contact-note small {
+  display: block; /* 要素を独立したブロックとして表示する。 */
+  margin-top: 52px; /* 要素の上側の外余白を指定する。 */
+  color: #687286; /* 文字やアイコンの色を指定する。 */
 }
 
-form button {
-    align-self: flex-start;
-    padding: 16px 38px;
-    border: none;
-    border-radius: 999px;
-    background: linear-gradient(
-        135dag,
-        var(--main),
-        var(--pink)
-    );
-    color: var(--text);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: .35s;
-    box-shadow: 0 12px 30px rgba(124, 170, 255, 0.25);
+.site-footer {
+  padding: 37px max(32px,calc((100vw - 1140px)/2)); /* 要素の内側の余白を指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  gap: 28px; /* 子要素同士の間隔を指定する。 */
+  background: var(--ink); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: #fff; /* 文字やアイコンの色を指定する。 */
 }
 
-form button:hover {
-    transform: translateY(-5px);
+.site-footer .brand img {
+  filter: brightness(0) invert(1); /* 要素そのものにぼかしや色の効果をかける。 */
+  width: 155px; /* 要素の幅を指定する。 */
 }
 
-/* ---footer--- */
-footer {
-    background: #2d2d35;
-    color: white;
-    text-align: center;
-    padding: 70px 10%;
+.site-footer p {
+  font: 500 11px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  margin: 0; /* 外余白をなくす。 */
 }
 
-footer h2 {
-    font-size: 2rem;
-    margin-bottom: 15px;
+.site-footer small {
+  margin-left: auto; /* 要素の左側の外余白を指定する。 */
+  font: 11px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  opacity: .6; /* 要素全体の不透明度を指定する。 */
 }
 
-footer h2 {
-    font-size: 2rem;
-    margin-bottom: 15px;
+.reveal {
+  opacity: 0; /* 要素全体の不透明度を指定する。 */
+  transform: translateY(18px); /* 移動、回転、拡大縮小などを適用する。 */
+  transition: opacity .65s ease,transform .65s ease; /* スタイルの変化を滑らかにする。 */
 }
 
-footer p {
-    color: #cfcfcf;
-    margin-bottom: 30px;
+.reveal.in-view {
+  opacity: 1; /* 要素全体の不透明度を指定する。 */
+  transform: none; /* 移動、回転、拡大縮小などを適用する。 */
 }
 
-footer small {
-    color: #9d9d9d;
+@keyframes float {
+  50% {
+    transform: translateX(-50%) translateY(-12px) rotate(-5deg); /* 移動、回転、拡大縮小などを適用する。 */
+  }
 }
 
-@media(max-width:700px){
-    header{
-        padding: 12px 5%;
-        flex-direction: column;
-        gap: 10px;
-    }
+@keyframes spin {
+  to {
+    transform: rotate(360deg); /* 移動、回転、拡大縮小などを適用する。 */
+  }
+}
 
-    .logo img{
-        width: 140px;
-        margin-bottom: 10px;
-    }
+@media(max-width:760px) {
+  .section-shell {
+    width: calc(100% - 40px); /* 要素の幅を指定する。 */
+  }
+  .site-header {
+    height: 68px; /* 要素の高さを指定する。 */
+    padding: 0 20px; /* 要素の内側の余白を指定する。 */
+  }
+  .brand img {
+    width: 145px; /* 要素の幅を指定する。 */
+  }
+  .menu-button {
+    display: flex; /* 子要素を横または縦に並べる。 */
+    flex-direction: column; /* 子要素を並べる方向を指定する。 */
+    gap: 5px; /* 子要素同士の間隔を指定する。 */
+    align-items: center; /* 子要素を交差軸方向にそろえる。 */
+    justify-content: center; /* 主軸方向の並び方と余白の配分を指定する。 */
+    width: 42px; /* 要素の幅を指定する。 */
+    height: 42px; /* 要素の高さを指定する。 */
+    border: 0; /* 枠線の太さ、種類、色を指定する。 */
+    border-radius: 50%; /* 角の丸みを指定する。 */
+    background: var(--ink); /* 背景色・画像・グラデーションなどを指定する。 */
+  }
+  .menu-button span:not(.sr-only) {
+    width: 18px; /* 要素の幅を指定する。 */
+    height: 2px; /* 要素の高さを指定する。 */
+    background: #fff; /* 背景色・画像・グラデーションなどを指定する。 */
+    transition: .2s; /* スタイルの変化を滑らかにする。 */
+  }
+  .menu-button.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg); /* 移動、回転、拡大縮小などを適用する。 */
+  }
+  .menu-button.open span:nth-child(2) {
+    opacity: 0; /* 要素全体の不透明度を指定する。 */
+  }
+  .menu-button.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg); /* 移動、回転、拡大縮小などを適用する。 */
+  }
+  .site-nav {
+    display: none; /* 要素を非表示にし、レイアウト上の場所も取らない。 */
+    position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+    top: 68px; /* 上端からの位置を指定する。 */
+    left: 0; /* 左端からの位置を指定する。 */
+    width: 100%; /* 要素の幅を指定する。 */
+    padding: 24px 20px 29px; /* 要素の内側の余白を指定する。 */
+    background: var(--paper); /* 背景色・画像・グラデーションなどを指定する。 */
+    border-bottom: 1px solid var(--line); /* 下側の枠線を指定する。 */
+    flex-direction: column; /* 子要素を並べる方向を指定する。 */
+    align-items: flex-start; /* 子要素を交差軸方向にそろえる。 */
+    gap: 20px; /* 子要素同士の間隔を指定する。 */
+  }
+  .site-nav.open {
+    display: flex; /* 子要素を横または縦に並べる。 */
+  }
+  .site-nav a {
+    font-size: 13px; /* 文字の大きさを指定する。 */
+  }
+  .hero {
+    min-height: calc(100svh - 68px); /* 要素の高さの下限を指定する。 */
+    display: block; /* 要素を独立したブロックとして表示する。 */
+    padding-block: 68px 88px; /* 要素の上下の内余白を指定する。 */
+  }
+  .hero h1,.page-hero h1 {
+    font-size: 39px; /* 文字の大きさを指定する。 */
+  }
+  .hero-art {
+    height: 280px; /* 要素の高さを指定する。 */
+    margin-top: 32px; /* 要素の上側の外余白を指定する。 */
+  }
+  .hero-logo {
+    width: 225px; /* 要素の幅を指定する。 */
+    top: 20px; /* 上端からの位置を指定する。 */
+  }
+  .orbit-a {
+    width: 260px; /* 要素の幅を指定する。 */
+    height: 100px; /* 要素の高さを指定する。 */
+    top: 90px; /* 上端からの位置を指定する。 */
+    left: 5px; /* 左端からの位置を指定する。 */
+  }
+  .orbit-b {
+    width: 185px; /* 要素の幅を指定する。 */
+    height: 265px; /* 要素の高さを指定する。 */
+    top: 2px; /* 上端からの位置を指定する。 */
+    left: 70px; /* 左端からの位置を指定する。 */
+  }
+  .sticker-star {
+    font-size: 40px; /* 文字の大きさを指定する。 */
+    right: 0; /* 右端からの位置を指定する。 */
+  }
+  .art-note {
+    font-size: 11px; /* 文字の大きさを指定する。 */
+  }
+  .sticker-dot {
+    width: 21px; /* 要素の幅を指定する。 */
+    height: 21px; /* 要素の高さを指定する。 */
+  }
+  .scroll-cue {
+    left: 20px; /* 左端からの位置を指定する。 */
+    bottom: 17px; /* 下端からの位置を指定する。 */
+  }
+  .intro-block,.contact-cta,.manifesto-item {
+    display: block; /* 要素を独立したブロックとして表示する。 */
+    padding-block: 75px; /* 要素の上下の内余白を指定する。 */
+  }
+  .intro-block h2,.section-heading h2,.contact-cta h2 {
+    font-size: 34px; /* 文字の大きさを指定する。 */
+  }
+  .intro-text {
+    padding-top: 21px; /* 要素の上側の内余白を指定する。 */
+  }
+  .process-section {
+    padding: 75px 0; /* 要素の内側の余白を指定する。 */
+  }
+  .process-list {
+    grid-template-columns: 1fr; /* グリッドの列数と各列の幅を指定する。 */
+    margin-top: 37px; /* 要素の上側の外余白を指定する。 */
+  }
+  .process-list li {
+    padding: 25px; /* 要素の内側の余白を指定する。 */
+  }
+  .process-list h3 {
+    margin: 16px 0 5px; /* 要素の外側の余白を指定する。 */
+  }
+  .works-teaser {
+    padding: 85px 0; /* 要素の内側の余白を指定する。 */
+  }
+  .work-grid {
+    grid-template-columns: 1fr; /* グリッドの列数と各列の幅を指定する。 */
+    margin-top: 35px; /* 要素の上側の外余白を指定する。 */
+  }
+  .work-card {
+    min-height: 220px; /* 要素の高さの下限を指定する。 */
+  }
+  .work-card h3 {
+    margin-top: 37px; /* 要素の上側の外余白を指定する。 */
+  }
+  .activity-banner {
+    padding: 75px 0; /* 要素の内側の余白を指定する。 */
+  }
+  .activity-stamp {
+    width: 117px; /* 要素の幅を指定する。 */
+    height: 117px; /* 要素の高さを指定する。 */
+    right: 7%; /* 右端からの位置を指定する。 */
+    bottom: -21px; /* 下端からの位置を指定する。 */
+    font-size: 13px; /* 文字の大きさを指定する。 */
+  }
+  .contact-cta {
+    padding: 80px 0; /* 要素の内側の余白を指定する。 */
+  }
+  .page-hero {
+    min-height: 0; /* 要素の高さの下限を指定する。 */
+    padding-top: 80px; /* 要素の上側の内余白を指定する。 */
+    padding-bottom: 67px; /* 要素の下側の内余白を指定する。 */
+  }
+  .page-hero-mark {
+    width: 170px; /* 要素の幅を指定する。 */
+    right: -28px; /* 右端からの位置を指定する。 */
+    top: 16px; /* 上端からの位置を指定する。 */
+  }
+  .manifesto {
+    padding-bottom: 75px; /* 要素の下側の内余白を指定する。 */
+  }
+  .manifesto-item {
+    padding-block: 36px; /* 要素の上下の内余白を指定する。 */
+  }
+  .manifesto-item>p {
+    padding-top: 5px; /* 要素の上側の内余白を指定する。 */
+  }
+  .about-closing {
+    padding: 77px 0; /* 要素の内側の余白を指定する。 */
+  }
+  .project-list {
+    padding-bottom: 75px; /* 要素の下側の内余白を指定する。 */
+  }
+  .project-detail {
+    display: block; /* 要素を独立したブロックとして表示する。 */
+    padding: 27px; /* 要素の内側の余白を指定する。 */
+  }
+  .project-detail>div:nth-child(2) {
+    margin-top: 36px; /* 要素の上側の外余白を指定する。 */
+  }
+  .project-detail dl {
+    margin-top: 27px; /* 要素の上側の外余白を指定する。 */
+  }
+  .member-grid {
+    grid-template-columns: 1fr; /* グリッドの列数と各列の幅を指定する。 */
+    gap: 16px; /* 子要素同士の間隔を指定する。 */
+    padding-bottom: 75px; /* 要素の下側の内余白を指定する。 */
+  }
+  .member-image {
+    height: 300px; /* 要素の高さを指定する。 */
+  }
+  .contact-options {
+    padding-bottom: 70px; /* 要素の下側の内余白を指定する。 */
+  }
+  .contact-option {
+    grid-template-columns: 32px 1fr 25px; /* グリッドの列数と各列の幅を指定する。 */
+    padding: 24px 4px; /* 要素の内側の余白を指定する。 */
+    gap: 12px; /* 子要素同士の間隔を指定する。 */
+  }
+  .contact-option h2 {
+    font-size: 19px; /* 文字の大きさを指定する。 */
+  }
+  .contact-note {
+    padding: 65px 20px; /* 要素の内側の余白を指定する。 */
+  }
+  .contact-note>div {
+    display: block; /* 要素を独立したブロックとして表示する。 */
+  }
+  .contact-note ul {
+    margin-top: 25px; /* 要素の上側の外余白を指定する。 */
+  }
+  .site-footer {
+    display: block; /* 要素を独立したブロックとして表示する。 */
+    padding: 33px 20px; /* 要素の内側の余白を指定する。 */
+  }
+  .site-footer p {
+    margin: 18px 0 7px; /* 要素の外側の余白を指定する。 */
+  }
+  .site-footer small {
+    display: block; /* 要素を独立したブロックとして表示する。 */
+  }
+  .reveal {
+    opacity: 1; /* 要素全体の不透明度を指定する。 */
+    transform: none; /* 移動、回転、拡大縮小などを適用する。 */
+    transition: none; /* スタイルの変化を滑らかにする。 */
+  }
+}
 
-    .logo h1{
-        font-size: 1.1rem;
-    }
+@media(prefers-reduced-motion:reduce) {
+  *,*:before,*:after {
+    animation-duration: .01ms!important; /* アニメーションの再生時間を指定する。 */
+    transition-duration: .01ms!important; /* スタイルが変化する時間を指定する。 */
+    scroll-behavior: auto!important; /* スクロール時の移動方法を指定する。 */
+  }
+}
+/* First penguin: an illustrated, interactive island journey. */
+:root {
+  --paper: #fafbf8; /* ページ全体の背景色を変数として定義する。 */
+  --ink: #294755; /* 基本の文字色を変数として定義する。 */
+  --blue: #537f8e; /* メインの青系の色を変数として定義する。 */
+  --orange: #cc9459; /* オレンジ系の差し色を変数として定義する。 */
+  --sky: #e2efee; /* 空をイメージした淡い色を変数として定義する。 */
+  --line: #29475535; /* 境界線に使う色を変数として定義する。 */
+}
 
-    nav{
-        width: 100%;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
+body {
+  font-weight: 400; /* 文字の太さを指定する。 */
+}
 
-    nav a{
-        font-size: 0.9rem;
-    }
+.site-header {
+  background: #fafbf8ed; /* 背景色・画像・グラデーションなどを指定する。 */
+  backdrop-filter: blur(12px); /* 要素の背後に見える背景に効果をかける。 */
+}
 
-    .hero h2 {
-        font-size: 1.5rem;
-        line-height: 1.2;
-        margin-bottom: 30px;
-        font-weight: 700;
-    }
+.site-nav a:after {
+  background: #648e9b; /* 背景色・画像・グラデーションなどを指定する。 */
+}
 
-    #canvas-container {
-        pointer-events: none;
-    }
+.eyebrow {
+  font-size: 10px; /* 文字の大きさを指定する。 */
+  letter-spacing: .17em; /* 文字同士の間隔を指定する。 */
+}
 
-    .timeline{
-        padding-left: 25px;
-    }
-    .timeline::before {
-        left: 10px;
-    }
+.expedition .site-header {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  inset: 0 0 auto; /* 基準となる辺からの位置をまとめて指定する。 */
+  height: 90px; /* 要素の高さを指定する。 */
+}
 
-    .timeline-item {
-        margin-left: 22px;
-        padding: 22px;
-    }
+.journey {
+  height: 850px; /* 要素の高さを指定する。 */
+  height: max(760px,100svh); /* 要素の高さを指定する。 */
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+}
 
-    .timeline-item::before {
-        left: -34px;
-    }
+.journey-stage {
+  height: 100%; /* 要素の高さを指定する。 */
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+  overflow: hidden; /* 枠からはみ出す部分を隠す。 */
+  background: #fafbf8; /* 背景色・画像・グラデーションなどを指定する。 */
+  --flight: 0; /* 飛び込み演出用の変数を変数として定義する。 */
+}
 
-    .timeline-item h3 {
-        font-size: 1.2rem;
-    }
+.scene-heading {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  top: 16%; /* 上端からの位置を指定する。 */
+  left: 10%; /* 左端からの位置を指定する。 */
+  z-index: 2; /* 重なった要素の前後関係を指定する。 */
+}
 
-    .member-grid{
+.scene-heading h1 {
+  font-weight: 500; /* 文字の太さを指定する。 */
+  font-size: clamp(30px,3vw,47px); /* 文字の大きさを指定する。 */
+  line-height: 1.7; /* 1行分の高さを指定する。 */
+  letter-spacing: .13em; /* 文字同士の間隔を指定する。 */
+  margin: 0 0 20px; /* 要素の外側の余白を指定する。 */
+}
 
-        grid-template-columns:1fr;
+.scene-intro {
+  font-size: 12px; /* 文字の大きさを指定する。 */
+  line-height: 2.2; /* 1行分の高さを指定する。 */
+  letter-spacing: .1em; /* 文字同士の間隔を指定する。 */
+}
 
-    }
+.sea {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  inset: 29% 0 0; /* 基準となる辺からの位置をまとめて指定する。 */
+  overflow: hidden; /* 枠からはみ出す部分を隠す。 */
+  background: linear-gradient(180deg,transparent 0 34%,#e6efed 34%,#c6ddde 100%); /* 背景色・画像・グラデーションなどを指定する。 */
+  clip-path: ellipse(90% 80% at 50% 80%); /* 図形で表示範囲を切り抜く。 */
+}
 
-    .project-card{
+.horizon {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  top: 34%; /* 上端からの位置を指定する。 */
+  width: 100%; /* 要素の幅を指定する。 */
+  height: 1px; /* 要素の高さを指定する。 */
+  background: #91afb150; /* 背景色・画像・グラデーションなどを指定する。 */
+}
 
-        padding:40px;
+.sea-word {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  top: 38%; /* 上端からの位置を指定する。 */
+  left: 8%; /* 左端からの位置を指定する。 */
+  font: clamp(45px,8.7vw,150px)/1 var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  letter-spacing: -.07em; /* 文字同士の間隔を指定する。 */
+  color: #ffffff57; /* 文字やアイコンの色を指定する。 */
+  white-space: nowrap; /* 途中で折り返さず1行で表示する。 */
+}
 
-    }
-    .media-card{
+.ice {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  background: #fafdf7; /* 背景色・画像・グラデーションなどを指定する。 */
+  border: 1px solid #9bb8b9; /* 枠線の太さ、種類、色を指定する。 */
+  clip-path: polygon(17% 0,75% 5%,100% 35%,90% 69%,59% 100%,11% 80%,0 35%); /* 図形で表示範囲を切り抜く。 */
+}
 
-        padding:28px;
+.ice:after {
+  content: ""; /* 装飾用の空の疑似要素を作る。 */
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  inset: 48% 0 0; /* 基準となる辺からの位置をまとめて指定する。 */
+  background: #bdd6d7; /* 背景色・画像・グラデーションなどを指定する。 */
+  clip-path: polygon(0 0,60% 35%,100% 0,100% 100%,0 100%); /* 図形で表示範囲を切り抜く。 */
+}
 
-    }
+.ice-start {
+  width: 32%; /* 要素の幅を指定する。 */
+  height: 130px; /* 要素の高さを指定する。 */
+  left: 16%; /* 左端からの位置を指定する。 */
+  top: 48%; /* 上端からの位置を指定する。 */
+  transform: rotate(-8deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
 
-    .sns-links{
+.ice-end {
+  width: 28%; /* 要素の幅を指定する。 */
+  height: 100px; /* 要素の高さを指定する。 */
+  left: 63%; /* 左端からの位置を指定する。 */
+  top: 42%; /* 上端からの位置を指定する。 */
+  transform: rotate(8deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
 
-        flex-direction:column;
+.ice-back {
+  width: 12%; /* 要素の幅を指定する。 */
+  height: 43px; /* 要素の高さを指定する。 */
+  left: 53%; /* 左端からの位置を指定する。 */
+  top: 26%; /* 上端からの位置を指定する。 */
+  opacity: .65; /* 要素全体の不透明度を指定する。 */
+}
 
-        align-items:center;
+.penguin {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  width: 125px; /* 要素の幅を指定する。 */
+  left: 32%; /* 左端からの位置を指定する。 */
+  top: calc(48% - 105px); /* 上端からの位置を指定する。 */
+  transform: translateX(-50%); /* 移動、回転、拡大縮小などを適用する。 */
+  transform-origin: 50% 85%; /* 変形の起点を指定する。 */
+  z-index: 3; /* 重なった要素の前後関係を指定する。 */
+}
 
-    }
+.penguin svg {
+  width: 100%; /* 要素の幅を指定する。 */
+  display: block; /* 要素を独立したブロックとして表示する。 */
+}
 
-    .sns-links a{
+.wing {
+  transform-box: fill-box; /* 変形に使う基準枠を指定する。 */
+  transform-origin: top center; /* 変形の起点を指定する。 */
+}
 
-        width:100%;
+.tiny-penguin {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  width: 39px; /* 要素の幅を指定する。 */
+  left: 74%; /* 左端からの位置を指定する。 */
+  top: calc(42% - 30px); /* 上端からの位置を指定する。 */
+  opacity: .7; /* 要素全体の不透明度を指定する。 */
+}
 
-        max-width:300px;
+.wave {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  width: 60px; /* 要素の幅を指定する。 */
+  height: 13px; /* 要素の高さを指定する。 */
+  border-bottom: 1px solid #729b9c80; /* 下側の枠線を指定する。 */
+  border-radius: 50%; /* 角の丸みを指定する。 */
+  transform: rotate(-4deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
 
-    }
+.w1 {
+  top: 74%; /* 上端からの位置を指定する。 */
+  left: 14%; /* 左端からの位置を指定する。 */
+}
 
-    form button{
+.w2 {
+  top: 62%; /* 上端からの位置を指定する。 */
+  left: 53%; /* 左端からの位置を指定する。 */
+  width: 90px; /* 要素の幅を指定する。 */
+}
 
-        width:100%;
+.w3 {
+  top: 81%; /* 上端からの位置を指定する。 */
+  left: 82%; /* 左端からの位置を指定する。 */
+}
 
-    }
+.splash {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  left: 74%; /* 左端からの位置を指定する。 */
+  top: 52%; /* 上端からの位置を指定する。 */
+  width: 60px; /* 要素の幅を指定する。 */
+  height: 15px; /* 要素の高さを指定する。 */
+  border: 1px solid #789fa1; /* 枠線の太さ、種類、色を指定する。 */
+  border-radius: 50%; /* 角の丸みを指定する。 */
+  opacity: 0; /* 要素全体の不透明度を指定する。 */
+}
+
+.scene-info {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  right: 10%; /* 右端からの位置を指定する。 */
+  top: 25%; /* 上端からの位置を指定する。 */
+  width: 300px; /* 要素の幅を指定する。 */
+  z-index: 4; /* 重なった要素の前後関係を指定する。 */
+}
+
+.scene-info h2 {
+  font-size: 19px; /* 文字の大きさを指定する。 */
+  font-weight: 500; /* 文字の太さを指定する。 */
+  letter-spacing: .04em; /* 文字同士の間隔を指定する。 */
+}
+
+.scene-info>p:not(.eyebrow) {
+  font-size: 12px; /* 文字の大きさを指定する。 */
+  line-height: 2; /* 1行分の高さを指定する。 */
+  max-width: 290px; /* 要素が広がる幅の上限を指定する。 */
+}
+
+.scene-link {
+  font-size: 12px; /* 文字の大きさを指定する。 */
+  text-decoration: none; /* 下線など文字の装飾を指定する。 */
+  border-bottom: 1px solid var(--ink); /* 下側の枠線を指定する。 */
+  padding: 8px 0; /* 要素の内側の余白を指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  justify-content: space-between; /* 主軸方向の並び方と余白の配分を指定する。 */
+  max-width: 220px; /* 要素が広がる幅の上限を指定する。 */
+}
+
+.journey-controls {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  bottom: 7%; /* 下端からの位置を指定する。 */
+  left: 10%; /* 左端からの位置を指定する。 */
+  right: 10%; /* 右端からの位置を指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  justify-content: space-between; /* 主軸方向の並び方と余白の配分を指定する。 */
+  z-index: 5; /* 重なった要素の前後関係を指定する。 */
+}
+
+.step-dots {
+  display: flex; /* 子要素を横または縦に並べる。 */
+  gap: 14px; /* 子要素同士の間隔を指定する。 */
+}
+
+.step-dots button {
+  font: 11px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  border: 1px solid #739696; /* 枠線の太さ、種類、色を指定する。 */
+  background: transparent; /* 背景色・画像・グラデーションなどを指定する。 */
+  border-radius: 50%; /* 角の丸みを指定する。 */
+  width: 36px; /* 要素の幅を指定する。 */
+  height: 36px; /* 要素の高さを指定する。 */
+  color: var(--ink); /* 文字やアイコンの色を指定する。 */
+  cursor: pointer; /* マウスポインターの形を指定する。 */
+}
+
+.step-dots button.selected {
+  background: var(--ink); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: white; /* 文字やアイコンの色を指定する。 */
+}
+
+.jump-button {
+  border: 1px solid #678d93; /* 枠線の太さ、種類、色を指定する。 */
+  background: #fafbf8c9; /* 背景色・画像・グラデーションなどを指定する。 */
+  color: var(--ink); /* 文字やアイコンの色を指定する。 */
+  padding: 15px 23px; /* 要素の内側の余白を指定する。 */
+  border-radius: 50px; /* 角の丸みを指定する。 */
+  font: 12px var(--sans); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  letter-spacing: .08em; /* 文字同士の間隔を指定する。 */
+  cursor: pointer; /* マウスポインターの形を指定する。 */
+}
+
+.jump-button span {
+  margin-left: 30px; /* 要素の左側の外余白を指定する。 */
+}
+
+.jump-button:hover {
+  background: var(--ink); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: white; /* 文字やアイコンの色を指定する。 */
+}
+
+.jump-button:disabled {
+  opacity: .5; /* 要素全体の不透明度を指定する。 */
+  cursor: wait; /* マウスポインターの形を指定する。 */
+}
+
+.journey-caption {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  bottom: 1.5%; /* 下端からの位置を指定する。 */
+  left: 10%; /* 左端からの位置を指定する。 */
+  font-size: 10px; /* 文字の大きさを指定する。 */
+  letter-spacing: .15em; /* 文字同士の間隔を指定する。 */
+}
+
+.mobile-hint {
+  display: none; /* 要素を非表示にし、レイアウト上の場所も取らない。 */
+}
+
+.island-index {
+  padding-block: 110px 130px; /* 要素の上下の内余白を指定する。 */
+}
+
+.index-intro {
+  margin-bottom: 60px; /* 要素の下側の外余白を指定する。 */
+  text-align: center; /* 文字を左・中央・右などにそろえる。 */
+}
+
+.index-intro h2 {
+  font-size: 32px; /* 文字の大きさを指定する。 */
+  line-height: 1.7; /* 1行分の高さを指定する。 */
+  letter-spacing: .12em; /* 文字同士の間隔を指定する。 */
+  font-weight: 500; /* 文字の太さを指定する。 */
+}
+
+.index-intro>p:last-child {
+  font-size: 13px; /* 文字の大きさを指定する。 */
+  line-height: 2.2; /* 1行分の高さを指定する。 */
+}
+
+.island-grid {
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: repeat(4,1fr); /* グリッドの列数と各列の幅を指定する。 */
+  gap: 24px; /* 子要素同士の間隔を指定する。 */
+}
+
+.island-grid>a {
+  border: 1px solid var(--line); /* 枠線の太さ、種類、色を指定する。 */
+  border-radius: 100px 100px 6px 6px; /* 角の丸みを指定する。 */
+  text-decoration: none; /* 下線など文字の装飾を指定する。 */
+  padding: 40px 22px 23px; /* 要素の内側の余白を指定する。 */
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+  background: #fcfdfa; /* 背景色・画像・グラデーションなどを指定する。 */
+  transition: transform .3s; /* スタイルの変化を滑らかにする。 */
+}
+
+.island-grid>a:hover {
+  transform: translateY(-8px); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.island-grid>a>span {
+  font: 9px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  display: block; /* 要素を独立したブロックとして表示する。 */
+  text-align: center; /* 文字を左・中央・右などにそろえる。 */
+}
+
+.index-art {
+  height: 160px; /* 要素の高さを指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  justify-content: center; /* 主軸方向の並び方と余白の配分を指定する。 */
+  font-size: 90px; /* 文字の大きさを指定する。 */
+  font-weight: 400; /* 文字の太さを指定する。 */
+  color: #80a7ab; /* 文字やアイコンの色を指定する。 */
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+}
+
+.art-about i {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  font-style: normal; /* 斜体など文字のスタイルを指定する。 */
+  font-size: 80px; /* 文字の大きさを指定する。 */
+  color: #c59b69; /* 文字やアイコンの色を指定する。 */
+}
+
+.art-works {
+  color: #d4af71; /* 文字やアイコンの色を指定する。 */
+}
+
+.art-members svg {
+  width: 100px; /* 要素の幅を指定する。 */
+}
+
+.art-contact {
+  font: italic 34px Georgia,serif; /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  color: #638c91; /* 文字やアイコンの色を指定する。 */
+}
+
+.art-contact span {
+  font-size: 40px; /* 文字の大きさを指定する。 */
+  padding-left: 8px; /* 要素の左側の内余白を指定する。 */
+}
+
+.island-grid h3 {
+  font-size: 15px; /* 文字の大きさを指定する。 */
+  font-weight: 500; /* 文字の太さを指定する。 */
+  margin-bottom: 7px; /* 要素の下側の外余白を指定する。 */
+}
+
+.island-grid p {
+  font-size: 10px; /* 文字の大きさを指定する。 */
+  line-height: 1.9; /* 1行分の高さを指定する。 */
+  margin-bottom: 28px; /* 要素の下側の外余白を指定する。 */
+}
+
+.island-grid b {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  bottom: 12px; /* 下端からの位置を指定する。 */
+  right: 18px; /* 右端からの位置を指定する。 */
+  font-weight: 400; /* 文字の太さを指定する。 */
+}
+
+.site-footer {
+  background: #e0eae6; /* 背景色・画像・グラデーションなどを指定する。 */
+  color: var(--ink); /* 文字やアイコンの色を指定する。 */
+  border-top: 1px solid var(--line); /* 上側の枠線を指定する。 */
+}
+
+.site-footer .brand img {
+  filter: none; /* 要素そのものにぼかしや色の効果をかける。 */
+}
+
+.page-hero h1 em {
+  color: #7c9d9c; /* 文字やアイコンの色を指定する。 */
+}
+
+.orange {
+  background: #b58e64; /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.blue {
+  background: #6f969e; /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.cream {
+  background: #e6e8d9; /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.member-card,.project-detail,.work-card {
+  border-radius: 4px; /* 角の丸みを指定する。 */
+}
+
+.page-hero {
+  border-bottom: 1px solid var(--line); /* 下側の枠線を指定する。 */
+  margin-bottom: 40px; /* 要素の下側の外余白を指定する。 */
+}
+
+.about-closing {
+  background: #7b9b9d; /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.scene-link:focus-visible,button:focus-visible,.island-grid a:focus-visible {
+  outline: 3px solid #b78851; /* 要素の外側に輪郭線を付ける。 */
+  outline-offset: 5px; /* 要素と輪郭線の間隔を指定する。 */
+}
+
+@media(min-width:761px) {
+  .journey-stage[data-step="1"] .sea {
+    filter: hue-rotate(-9deg); /* 要素そのものにぼかしや色の効果をかける。 */
+  }
+  .journey-stage[data-step="2"] .sea {
+    filter: hue-rotate(9deg); /* 要素そのものにぼかしや色の効果をかける。 */
+  }
+  .journey-stage[data-step="3"] .sea {
+    filter: hue-rotate(-16deg); /* 要素そのものにぼかしや色の効果をかける。 */
+  }
+}
+
+@media(max-width:760px) {
+  .expedition .site-header {
+    height: 68px; /* 要素の高さを指定する。 */
+    position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  }
+  .journey {
+    height: 360svh; /* 要素の高さを指定する。 */
+  }
+  .journey-stage {
+    position: sticky; /* スクロール中、指定した位置で要素を留める。 */
+    top: 0; /* 上端からの位置を指定する。 */
+    height: 100svh; /* 要素の高さを指定する。 */
+    min-height: 620px; /* 要素の高さの下限を指定する。 */
+  }
+  .scene-heading {
+    top: 95px; /* 上端からの位置を指定する。 */
+    left: 8%; /* 左端からの位置を指定する。 */
+  }
+  .scene-heading .eyebrow {
+    font-size: 8px; /* 文字の大きさを指定する。 */
+    margin-bottom: 14px; /* 要素の下側の外余白を指定する。 */
+  }
+  .scene-heading h1 {
+    font-size: 26px; /* 文字の大きさを指定する。 */
+    line-height: 1.6; /* 1行分の高さを指定する。 */
+    letter-spacing: .07em; /* 文字同士の間隔を指定する。 */
+    margin-bottom: 12px; /* 要素の下側の外余白を指定する。 */
+  }
+  .scene-intro {
+    font-size: 10px; /* 文字の大きさを指定する。 */
+    line-height: 1.9; /* 1行分の高さを指定する。 */
+  }
+  .sea {
+    inset: 30% 0 0; /* 基準となる辺からの位置をまとめて指定する。 */
+    clip-path: ellipse(130% 76% at 50% 85%); /* 図形で表示範囲を切り抜く。 */
+  }
+  .sea-word {
+    font-size: 47px; /* 文字の大きさを指定する。 */
+    top: 40%; /* 上端からの位置を指定する。 */
+    left: 4%; /* 左端からの位置を指定する。 */
+  }
+  .penguin {
+    width: 87px; /* 要素の幅を指定する。 */
+    left: 25%; /* 左端からの位置を指定する。 */
+    top: calc(51% - 78px); /* 上端からの位置を指定する。 */
+  }
+  .ice-start {
+    left: 5%; /* 左端からの位置を指定する。 */
+    top: 51%; /* 上端からの位置を指定する。 */
+    width: 43%; /* 要素の幅を指定する。 */
+    height: 85px; /* 要素の高さを指定する。 */
+  }
+  .ice-end {
+    left: 65%; /* 左端からの位置を指定する。 */
+    top: 45%; /* 上端からの位置を指定する。 */
+    width: 34%; /* 要素の幅を指定する。 */
+    height: 70px; /* 要素の高さを指定する。 */
+  }
+  .ice-back {
+    left: 52%; /* 左端からの位置を指定する。 */
+    top: 34%; /* 上端からの位置を指定する。 */
+  }
+  .tiny-penguin {
+    width: 28px; /* 要素の幅を指定する。 */
+    left: 77%; /* 左端からの位置を指定する。 */
+    top: calc(45% - 23px); /* 上端からの位置を指定する。 */
+  }
+  .scene-info {
+    left: 8%; /* 左端からの位置を指定する。 */
+    right: 8%; /* 右端からの位置を指定する。 */
+    top: auto; /* 上端からの位置を指定する。 */
+    bottom: 18%; /* 下端からの位置を指定する。 */
+    width: auto; /* 要素の幅を指定する。 */
+  }
+  .scene-info .eyebrow {
+    font-size: 8px; /* 文字の大きさを指定する。 */
+    margin-bottom: 9px; /* 要素の下側の外余白を指定する。 */
+  }
+  .scene-info h2 {
+    font-size: 17px; /* 文字の大きさを指定する。 */
+    margin-bottom: 6px; /* 要素の下側の外余白を指定する。 */
+  }
+  .scene-info>p:not(.eyebrow) {
+    font-size: 10px; /* 文字の大きさを指定する。 */
+    margin-bottom: 4px; /* 要素の下側の外余白を指定する。 */
+    max-width: 90%; /* 要素が広がる幅の上限を指定する。 */
+  }
+  .scene-link {
+    font-size: 11px; /* 文字の大きさを指定する。 */
+    width: 185px; /* 要素の幅を指定する。 */
+    padding: 7px 0; /* 要素の内側の余白を指定する。 */
+  }
+  .journey-controls {
+    left: 8%; /* 左端からの位置を指定する。 */
+    right: 8%; /* 右端からの位置を指定する。 */
+    bottom: 7%; /* 下端からの位置を指定する。 */
+    align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  }
+  .step-dots {
+    gap: 9px; /* 子要素同士の間隔を指定する。 */
+  }
+  .step-dots button {
+    width: 29px; /* 要素の幅を指定する。 */
+    height: 29px; /* 要素の高さを指定する。 */
+    font-size: 9px; /* 文字の大きさを指定する。 */
+  }
+  .jump-button {
+    display: none; /* 要素を非表示にし、レイアウト上の場所も取らない。 */
+  }
+  .mobile-hint {
+    display: block; /* 要素を独立したブロックとして表示する。 */
+    font: 8px var(--mono); /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+    letter-spacing: .08em; /* 文字同士の間隔を指定する。 */
+    margin: 0; /* 外余白をなくす。 */
+  }
+  .mobile-hint span {
+    margin-left: 10px; /* 要素の左側の外余白を指定する。 */
+    font-size: 17px; /* 文字の大きさを指定する。 */
+  }
+  .journey-caption {
+    left: 8%; /* 左端からの位置を指定する。 */
+    font-size: 8px; /* 文字の大きさを指定する。 */
+    bottom: 2%; /* 下端からの位置を指定する。 */
+  }
+  .island-index {
+    padding-block: 75px; /* 要素の上下の内余白を指定する。 */
+  }
+  .index-intro h2 {
+    font-size: 27px; /* 文字の大きさを指定する。 */
+  }
+  .index-intro>p:last-child {
+    font-size: 11px; /* 文字の大きさを指定する。 */
+  }
+  .island-grid {
+    grid-template-columns: 1fr 1fr; /* グリッドの列数と各列の幅を指定する。 */
+    gap: 12px; /* 子要素同士の間隔を指定する。 */
+  }
+  .island-grid>a {
+    padding: 30px 15px 24px; /* 要素の内側の余白を指定する。 */
+    border-radius: 80px 80px 4px 4px; /* 角の丸みを指定する。 */
+  }
+  .island-grid>a>span {
+    font-size: 8px; /* 文字の大きさを指定する。 */
+  }
+  .index-art {
+    height: 120px; /* 要素の高さを指定する。 */
+    font-size: 70px; /* 文字の大きさを指定する。 */
+  }
+  .art-contact {
+    font-size: 27px; /* 文字の大きさを指定する。 */
+  }
+  .art-contact span {
+    font-size: 26px; /* 文字の大きさを指定する。 */
+  }
+  .art-members svg {
+    width: 76px; /* 要素の幅を指定する。 */
+  }
+  .island-grid h3 {
+    font-size: 12px; /* 文字の大きさを指定する。 */
+  }
+  .island-grid p {
+    font-size: 9px; /* 文字の大きさを指定する。 */
+  }
+  .site-footer {
+    padding: 32px 20px; /* 要素の内側の余白を指定する。 */
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto; /* スクロール時の移動方法を指定する。 */
+  }
+  .penguin,.wing {
+    animation: none!important; /* アニメーション名、時間、繰り返しなどを指定する。 */
+  }
+  .island-grid>a:hover {
+    transform: none; /* 移動、回転、拡大縮小などを適用する。 */
+  }
+}
+/* Composition from the supplied first-penguin sketch: cliff at right, sea at left. */
+.sea {
+  inset: 32% 0 0; /* 基準となる辺からの位置をまとめて指定する。 */
+  background: none; /* 背景色と背景画像を解除する。 */
+  clip-path: none; /* 図形で表示範囲を切り抜く。 */
+  filter: none!important; /* 要素そのものにぼかしや色の効果をかける。 */
+}
+
+.ocean-drawing {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  inset: 0; /* 基準となる辺からの位置をまとめて指定する。 */
+  width: 100%; /* 要素の幅を指定する。 */
+  height: 100%; /* 要素の高さを指定する。 */
+}
+
+.ice-cliff {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  right: -2%; /* 右端からの位置を指定する。 */
+  top: 22%; /* 上端からの位置を指定する。 */
+  width: 45%; /* 要素の幅を指定する。 */
+  height: 85%; /* 要素の高さを指定する。 */
+  z-index: 2; /* 重なった要素の前後関係を指定する。 */
+}
+
+.penguin {
+  left: 60%; /* 左端からの位置を指定する。 */
+  top: calc(30% - 125px); /* 上端からの位置を指定する。 */
+  width: 115px; /* 要素の幅を指定する。 */
+  z-index: 4; /* 重なった要素の前後関係を指定する。 */
+}
+
+.penguin-flock {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  left: 66%; /* 左端からの位置を指定する。 */
+  right: 2%; /* 右端からの位置を指定する。 */
+  top: calc(30% - 120px); /* 上端からの位置を指定する。 */
+  height: 130px; /* 要素の高さを指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  align-items: flex-end; /* 子要素を交差軸方向にそろえる。 */
+  justify-content: space-evenly; /* 主軸方向の並び方と余白の配分を指定する。 */
+  z-index: 3; /* 重なった要素の前後関係を指定する。 */
+}
+
+.penguin-flock span {
+  width: 90px; /* 要素の幅を指定する。 */
+  display: block; /* 要素を独立したブロックとして表示する。 */
+  transform: rotate(-7deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.penguin-flock span:nth-child(2) {
+  width: 101px; /* 要素の幅を指定する。 */
+  transform: translateY(-5px) rotate(-4deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.penguin-flock span:nth-child(3) {
+  width: 84px; /* 要素の幅を指定する。 */
+  transform: translateY(3px) rotate(-10deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.penguin-flock svg {
+  display: block; /* 要素を独立したブロックとして表示する。 */
+  width: 100%; /* 要素の幅を指定する。 */
+}
+
+.sea-word {
+  top: 62%; /* 上端からの位置を指定する。 */
+  left: 6%; /* 左端からの位置を指定する。 */
+  font-size: clamp(40px,7vw,110px); /* 文字の大きさを指定する。 */
+  color: #ffffff65; /* 文字やアイコンの色を指定する。 */
+  z-index: 1; /* 重なった要素の前後関係を指定する。 */
+}
+
+.scene-info {
+  top: auto; /* 上端からの位置を指定する。 */
+  bottom: 24%; /* 下端からの位置を指定する。 */
+  left: 10%; /* 左端からの位置を指定する。 */
+  right: auto; /* 右端からの位置を指定する。 */
+  width: 320px; /* 要素の幅を指定する。 */
+  z-index: 6; /* 重なった要素の前後関係を指定する。 */
+}
+
+.scene-heading {
+  top: 16%; /* 上端からの位置を指定する。 */
+}
+
+.scene-heading h1 {
+  font-size: clamp(30px,3vw,47px); /* 文字の大きさを指定する。 */
+}
+
+.splash {
+  z-index: 5; /* 重なった要素の前後関係を指定する。 */
+  left: 35%; /* 左端からの位置を指定する。 */
+  top: 68%; /* 上端からの位置を指定する。 */
+  width: 75px; /* 要素の幅を指定する。 */
+  height: 20px; /* 要素の高さを指定する。 */
+  border: 0; /* 枠線の太さ、種類、色を指定する。 */
+  opacity: 0; /* 要素全体の不透明度を指定する。 */
+}
+
+.splash i {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  width: 8px; /* 要素の幅を指定する。 */
+  height: 28px; /* 要素の高さを指定する。 */
+  border-radius: 70% 30% 50% 50%; /* 角の丸みを指定する。 */
+  background: #fff; /* 背景色・画像・グラデーションなどを指定する。 */
+  left: 25%; /* 左端からの位置を指定する。 */
+  top: -25px; /* 上端からの位置を指定する。 */
+  transform: rotate(-25deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.splash i:nth-child(2) {
+  left: 55%; /* 左端からの位置を指定する。 */
+  top: -40px; /* 上端からの位置を指定する。 */
+  height: 34px; /* 要素の高さを指定する。 */
+  transform: rotate(10deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.splash i:nth-child(3) {
+  left: 85%; /* 左端からの位置を指定する。 */
+  top: -20px; /* 上端からの位置を指定する。 */
+  transform: rotate(35deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.water-ring {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  left: 34%; /* 左端からの位置を指定する。 */
+  top: 69%; /* 上端からの位置を指定する。 */
+  width: 100px; /* 要素の幅を指定する。 */
+  height: 22px; /* 要素の高さを指定する。 */
+  border: 1px solid #7d9fa1; /* 枠線の太さ、種類、色を指定する。 */
+  border-radius: 50%; /* 角の丸みを指定する。 */
+  opacity: 0; /* 要素全体の不透明度を指定する。 */
+  z-index: 4; /* 重なった要素の前後関係を指定する。 */
+}
+
+.journey-controls {
+  bottom: 7%; /* 下端からの位置を指定する。 */
+}
+
+.journey-caption {
+  z-index: 5; /* 重なった要素の前後関係を指定する。 */
+}
+
+.scene-info h2 {
+  max-width: 310px; /* 要素が広がる幅の上限を指定する。 */
+}
+
+.scene-info>p:not(.eyebrow) {
+  max-width: 300px; /* 要素が広がる幅の上限を指定する。 */
+}
+
+.scene-intro {
+  max-width: 380px; /* 要素が広がる幅の上限を指定する。 */
+}
+
+@media(max-width:760px) {
+  .sea {
+    inset: 31% 0 0; /* 基準となる辺からの位置をまとめて指定する。 */
+  }
+  .ocean-drawing {
+    width: 150%; /* 要素の幅を指定する。 */
+    left: -25%; /* 左端からの位置を指定する。 */
+  }
+  .ice-cliff {
+    right: -6%; /* 右端からの位置を指定する。 */
+    width: 49%; /* 要素の幅を指定する。 */
+    height: 76%; /* 要素の高さを指定する。 */
+    top: 25%; /* 上端からの位置を指定する。 */
+  }
+  .penguin {
+    left: 59%; /* 左端からの位置を指定する。 */
+    width: 68px; /* 要素の幅を指定する。 */
+    top: calc(33% - 77px); /* 上端からの位置を指定する。 */
+  }
+  .penguin-flock {
+    left: 68%; /* 左端からの位置を指定する。 */
+    right: -2%; /* 右端からの位置を指定する。 */
+    top: calc(33% - 74px); /* 上端からの位置を指定する。 */
+    height: 80px; /* 要素の高さを指定する。 */
+    gap: 0; /* 子要素同士の間隔を指定する。 */
+  }
+  .penguin-flock span {
+    width: 44px; /* 要素の幅を指定する。 */
+    flex-shrink: 0; /* 空き幅が足りないときに縮む割合を指定する。 */
+  }
+  .penguin-flock span:nth-child(2) {
+    width: 48px; /* 要素の幅を指定する。 */
+  }
+  .penguin-flock span:nth-child(3) {
+    width: 41px; /* 要素の幅を指定する。 */
+  }
+  .scene-heading {
+    top: 95px; /* 上端からの位置を指定する。 */
+  }
+  .scene-heading h1 {
+    font-size: 26px; /* 文字の大きさを指定する。 */
+  }
+  .scene-info {
+    bottom: 18%; /* 下端からの位置を指定する。 */
+    left: 8%; /* 左端からの位置を指定する。 */
+    width: 82%; /* 要素の幅を指定する。 */
+  }
+  .scene-info h2 {
+    max-width: 100%; /* 要素が広がる幅の上限を指定する。 */
+    font-size: 16px; /* 文字の大きさを指定する。 */
+  }
+  .scene-info>p:not(.eyebrow) {
+    max-width: 100%; /* 要素が広がる幅の上限を指定する。 */
+  }
+  .sea-word {
+    top: 70%; /* 上端からの位置を指定する。 */
+    left: 5%; /* 左端からの位置を指定する。 */
+    font-size: 41px; /* 文字の大きさを指定する。 */
+  }
+  .splash {
+    top: 61%; /* 上端からの位置を指定する。 */
+    left: 28%; /* 左端からの位置を指定する。 */
+    width: 50px; /* 要素の幅を指定する。 */
+  }
+  .water-ring {
+    top: 62%; /* 上端からの位置を指定する。 */
+    left: 26%; /* 左端からの位置を指定する。 */
+    width: 65px; /* 要素の幅を指定する。 */
+    height: 15px; /* 要素の高さを指定する。 */
+  }
+  .journey-caption {
+    bottom: 2%; /* 下端からの位置を指定する。 */
+  }
+  .journey-controls {
+    bottom: 7%; /* 下端からの位置を指定する。 */
+  }
+}
+/* Side-profile penguins, with a deep queue behind the first diver. */
+.penguin .side-penguin {
+  width: 100%; /* 要素の幅を指定する。 */
+  overflow: visible; /* 枠からはみ出す内容の表示方法を指定する。 */
+}
+
+.side-wing {
+  transform-box: view-box; /* 変形に使う基準枠を指定する。 */
+  transform-origin: 103px 95px; /* 変形の起点を指定する。 */
+  transition: transform .2s ease; /* スタイルの変化を滑らかにする。 */
+}
+
+.penguin.is-diving .side-wing {
+  transform: rotate(-93deg); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.penguin {
+  width: 110px; /* 要素の幅を指定する。 */
+  top: calc(30% - 126px); /* 上端からの位置を指定する。 */
+}
+
+.penguin-flock {
+  left: 65%; /* 左端からの位置を指定する。 */
+  right: -3%; /* 右端からの位置を指定する。 */
+  top: calc(30% - 125px); /* 上端からの位置を指定する。 */
+  height: 155px; /* 要素の高さを指定する。 */
+  display: block; /* 要素を独立したブロックとして表示する。 */
+  isolation: isolate; /* この要素内に独立した重なり順を作る。 */
+}
+
+.penguin-flock span,.penguin-flock span:nth-child(2),.penguin-flock span:nth-child(3) {
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  width: 75px; /* 要素の幅を指定する。 */
+  left: calc(var(--col)*15%); /* 左端からの位置を指定する。 */
+  bottom: calc(var(--row)*30px); /* 下端からの位置を指定する。 */
+  transform: rotate(-2deg); /* 移動、回転、拡大縮小などを適用する。 */
+  z-index: calc(20 - var(--i)); /* 重なった要素の前後関係を指定する。 */
+  opacity: calc(1 - var(--row)*.14); /* 要素全体の不透明度を指定する。 */
+}
+
+.penguin-flock span:nth-child(3n) {
+  width: 80px; /* 要素の幅を指定する。 */
+}
+
+.penguin-flock span:nth-child(3n + 1) {
+  width: 70px; /* 要素の幅を指定する。 */
+}
+
+.penguin-flock.is-advancing {
+  animation: queue-step .6s ease; /* アニメーション名、時間、繰り返しなどを指定する。 */
+}
+
+.art-members svg {
+  height: 120px; /* 要素の高さを指定する。 */
+  width: 95px; /* 要素の幅を指定する。 */
+}
+
+.water-ring {
+  pointer-events: none; /* マウス操作の対象になるか指定する。 */
+}
+
+@keyframes queue-step {
+  0% {
+    transform: translateX(13px); /* 移動、回転、拡大縮小などを適用する。 */
+  }
+  100% {
+    transform: translateX(0); /* 移動、回転、拡大縮小などを適用する。 */
+  }
+}
+
+@media(max-width:760px) {
+  .penguin {
+    width: 64px; /* 要素の幅を指定する。 */
+    top: calc(33% - 78px); /* 上端からの位置を指定する。 */
+  }
+  .penguin-flock {
+    left: 67%; /* 左端からの位置を指定する。 */
+    right: -12%; /* 右端からの位置を指定する。 */
+    top: calc(33% - 74px); /* 上端からの位置を指定する。 */
+    height: 90px; /* 要素の高さを指定する。 */
+  }
+  .penguin-flock span,.penguin-flock span:nth-child(2),.penguin-flock span:nth-child(3) {
+    width: 41px; /* 要素の幅を指定する。 */
+    left: calc(var(--col)*16%); /* 左端からの位置を指定する。 */
+    bottom: calc(var(--row)*17px); /* 下端からの位置を指定する。 */
+  }
+  .penguin-flock span:nth-child(3n) {
+    width: 44px; /* 要素の幅を指定する。 */
+  }
+  .penguin-flock span:nth-child(3n + 1) {
+    width: 38px; /* 要素の幅を指定する。 */
+  }
+  .art-members svg {
+    height: 100px; /* 要素の高さを指定する。 */
+    width: 75px; /* 要素の幅を指定する。 */
+  }
 }

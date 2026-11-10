@@ -1,0 +1,1106 @@
+:root {
+  --blue: #D3EDF4; /* メインの青系の色を変数として定義する。 */
+  --pale: #edf7fa; /* 淡い背景色を変数として定義する。 */
+  --ink: #15343d; /* 基本の文字色を変数として定義する。 */
+  --muted: #48636a; /* 補足テキストの色を変数として定義する。 */
+  --marker: #ffebcec9; /* マーカーの背景色を変数として定義する。 */
+  --line: #bbdce4; /* 境界線に使う色を変数として定義する。 */
+}
+
+* {
+  box-sizing: border-box; /* 指定した幅と高さに内余白と枠線を含める。 */
+}
+
+html {
+  scroll-padding-top: 20px; /* スクロール先と画面上端の間に余白を確保する。 */
+}
+
+body {
+  margin: 0; /* 外余白をなくす。 */
+  color: var(--ink); /* 文字やアイコンの色を指定する。 */
+  background: #fff; /* 背景色・画像・グラデーションなどを指定する。 */
+  font: 16px/1.7 "Hiragino Sans", "Yu Gothic", sans-serif; /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+}
+
+img {
+  max-width: 100%; /* 要素が広がる幅の上限を指定する。 */
+  height: auto; /* 幅や内容に応じて高さを自動で決める。 */
+  display: block; /* 要素を独立したブロックとして表示する。 */
+}
+
+a {
+  color: inherit; /* 文字やアイコンの色を指定する。 */
+  text-decoration: none; /* 下線など文字の装飾を指定する。 */
+}
+
+a:focus-visible {
+  outline: 2px solid #29677a; /* 要素の外側に輪郭線を付ける。 */
+  outline-offset: 4px; /* 要素と輪郭線の間隔を指定する。 */
+}
+
+h1, h2, h3, p {
+  margin: 0; /* 外余白をなくす。 */
+}
+
+.shell {
+  width: min(1120px, calc(100% - 80px)); /* 要素の幅を指定する。 */
+  margin-inline: auto; /* 要素の左右の外余白を指定する。 */
+}
+
+.nav {
+  display: flex; /* 子要素を横または縦に並べる。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  justify-content: space-between; /* 主軸方向の並び方と余白の配分を指定する。 */
+  gap: 16px; /* 子要素同士の間隔を指定する。 */
+}
+
+.header {
+  background: #fff; /* 背景色・画像・グラデーションなどを指定する。 */
+  padding-block: 22px; /* 要素の上下の内余白を指定する。 */
+}
+
+nav {
+  display: flex; /* 子要素を横または縦に並べる。 */
+  gap: 7px; /* 子要素同士の間隔を指定する。 */
+}
+
+nav a, .pill {
+  background: var(--blue); /* 背景色・画像・グラデーションなどを指定する。 */
+  border-radius: 100px; /* 角の丸みを指定する。 */
+  font-weight: 600; /* 文字の太さを指定する。 */
+}
+
+nav a {
+  padding: 5px 15px; /* 要素の内側の余白を指定する。 */
+  font-size: 13px; /* 文字の大きさを指定する。 */
+  white-space: nowrap; /* 途中で折り返さず1行で表示する。 */
+}
+
+nav a:hover, .pill:hover {
+  background: #b9e0eb; /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.hero {
+  background: var(--pale); /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.hero-inner {
+  min-height: 100svh; /* 要素の高さの下限を指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  flex-direction: column-reverse; /* 子要素を並べる方向を指定する。 */
+  align-items: flex-start; /* 子要素を交差軸方向にそろえる。 */
+  justify-content: center; /* 主軸方向の並び方と余白の配分を指定する。 */
+  gap: 24px; /* 子要素同士の間隔を指定する。 */
+  padding-block: 44px; /* 要素の上下の内余白を指定する。 */
+}
+
+.kicker {
+  font: 600 11px/1.6 ui-monospace, monospace; /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  letter-spacing: .13em; /* 文字同士の間隔を指定する。 */
+  color: var(--muted); /* 文字やアイコンの色を指定する。 */
+}
+
+.hero-inner > .kicker {
+  padding-inline: max(16px, calc((100% - 1120px) / 2)); /* 要素の左右の内余白を指定する。 */
+}
+
+.hero-copy {
+  width: min(92%, 760px); /* 要素の幅を指定する。 */
+  padding: clamp(24px, 5vw, 64px); /* 要素の内側の余白を指定する。 */
+  padding-left: max(clamp(22px, 5vw, 64px), calc((100vw - 1120px) / 2)); /* 要素の左側の内余白を指定する。 */
+}
+
+.marker {
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+  isolation: isolate; /* この要素内に独立した重なり順を作る。 */
+}
+
+.marker::before {
+  content: ""; /* 装飾用の空の疑似要素を作る。 */
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  inset: 0; /* 基準となる辺からの位置をまとめて指定する。 */
+  z-index: -1; /* 重なった要素の前後関係を指定する。 */
+  background: var(--marker); /* 背景色・画像・グラデーションなどを指定する。 */
+  transform-origin: left center; /* 変形の起点を指定する。 */
+}
+
+.marker-pending::before {
+  transform: scaleX(0); /* 移動、回転、拡大縮小などを適用する。 */
+}
+
+.marker-drawn::before {
+  transition: transform 850ms cubic-bezier(.24, .7, .3, 1); /* スタイルの変化を滑らかにする。 */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker::before {
+    transform: none; /* 移動、回転、拡大縮小などを適用する。 */
+    transition: none; /* スタイルの変化を滑らかにする。 */
+  }
+}
+
+.hero h1 {
+  font-size: clamp(42px, 6.2vw, 80px); /* 文字の大きさを指定する。 */
+  line-height: 1.22; /* 1行分の高さを指定する。 */
+  font-weight: 650; /* 文字の太さを指定する。 */
+  letter-spacing: .02em; /* 文字同士の間隔を指定する。 */
+}
+
+.hero-copy p {
+  margin-top: 22px; /* 要素の上側の外余白を指定する。 */
+  font-size: 14px; /* 文字の大きさを指定する。 */
+}
+
+.section {
+  padding: 76px 0; /* 要素の内側の余白を指定する。 */
+}
+
+.section-head {
+  margin-bottom: 32px; /* 要素の下側の外余白を指定する。 */
+}
+
+.section-head .kicker {
+  margin-bottom: 10px; /* 要素の下側の外余白を指定する。 */
+}
+
+.section h2, .section h1 {
+  font-size: clamp(27px, 4.4vw, 47px); /* 文字の大きさを指定する。 */
+  line-height: 1.24; /* 1行分の高さを指定する。 */
+}
+/* ABOUT欄：見出しと、写真付きの活動の歩み。 */
+.about {
+  background: var(--blue); /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.about .section-head {
+  display: grid; /* 子要素を行と列で配置する。 */
+}
+/* 見出しを右端に寄せる。負の右マージンで本文の余白を相殺する。 */
+.note-title {
+  justify-self: end; /* グリッド内でこの項目の行方向の位置を指定する。 */
+  width: max-content; /* 要素の幅を指定する。 */
+  max-width: calc(100vw - 16px); /* 要素が広がる幅の上限を指定する。 */
+  margin-right: calc((100% - 100dvw) / 2); /* 要素の右側の外余白を指定する。 */
+  padding: 24px max(24px, calc((100vw - 1120px) / 2)) 24px clamp(24px, 5vw, 58px); /* 要素の内側の余白を指定する。 */
+  font-weight: 600; /* 文字の太さを指定する。 */
+}
+/* 見出しのマーカーは右端を起点に伸びる。 */
+.note-title::before {
+  transform-origin: right center; /* 変形の起点を指定する。 */
+}
+.story {
+  --timeline-axis: 6px; /* スマホではタイムラインの軸を左側に置く。 */
+  position: relative; /* 縦線と末尾の矢印を配置する基準にする。 */
+  list-style: none; /* ブラウザ標準の番号を隠す。 */
+  max-width: 1000px; /* PCでタイムラインが広がりすぎないようにする。 */
+  margin: 44px auto 36px; /* ABOUT欄の中央に置き、上下に余白を取る。 */
+  padding: 0 0 26px; /* 線の末尾に矢印を置くための余白。 */
+  display: grid; /* 出来事を時系列順に縦に並べる。 */
+  gap: 32px; /* 出来事同士の間隔。 */
+}
+
+.story::before {
+  content: ""; /* 装飾用の縦線を作る。 */
+  position: absolute; /* タイムラインの中で位置を指定する。 */
+  inset: 20px auto 0 var(--timeline-axis); /* 最初の丸印から末尾まで伸ばす。 */
+  width: 1px; /* 線の太さ。 */
+  background: var(--muted); /* 既存の水色の背景に合う線の色。 */
+}
+
+.story::after {
+  content: ""; /* 縦線の末尾に矢印を描く。 */
+  position: absolute; /* 縦線の下端に置く。 */
+  inset: auto auto 0 var(--timeline-axis); /* 縦線と同じ軸に合わせる。 */
+  width: 8px; /* 矢印の幅。 */
+  height: 8px; /* 矢印の高さ。 */
+  border: solid var(--muted); /* 縦線と矢印の色をそろえる。 */
+  border-width: 0 1px 1px 0; /* 右と下の辺だけを使う。 */
+  transform: translateX(-50%) rotate(45deg); /* 矢印を下向きにする。 */
+}
+
+.story li {
+  position: relative; /* 各出来事の丸印を配置する基準にする。 */
+  min-width: 0; /* 狭い画面でも文章を折り返せるようにする。 */
+  padding-left: 24px; /* 左側の縦線とカードの間隔を取る。 */
+}
+
+.story li::before {
+  content: ""; /* 出来事を示す丸印を作る。 */
+  position: absolute; /* カードの見出しの近くに配置する。 */
+  top: 20px; /* 最初の丸印と縦線の開始位置をそろえる。 */
+  left: var(--timeline-axis); /* 丸印を縦線と同じ軸に置く。 */
+  width: 10px; /* 丸印の幅。 */
+  height: 10px; /* 丸印の高さ。 */
+  border-radius: 50%; /* 正方形を丸くする。 */
+  background: var(--muted); /* 縦線と同じ色にする。 */
+  transform: translate(-50%, -50%); /* 丸印の中心を軸に合わせる。 */
+}
+
+.story-sticker {
+  display: none; /* スマホでは年表の装飾を隠す。 */
+}
+
+@media (min-width: 768px) {
+  .story {
+    --timeline-axis: 50%; /* PCでは縦線と丸印を中央に移す。 */
+  }
+
+  .story li {
+    padding: 0 calc(50% + 24px) 0 0; /* 奇数番目のカードと写真を左側に置く。 */
+  }
+
+  .story li:nth-child(even) {
+    padding: 0 0 0 calc(50% + 24px); /* 偶数番目のカードと写真を右側に置く。 */
+  }
+
+  .story-sticker {
+    display: block; /* PCで空いている側にだけ表示する。 */
+    position: absolute; /* カードの幅や段の高さに影響させずに配置する。 */
+    left: 75%; /* 左側のカードに対して、右側の中央に置く。 */
+    top: 50%; /* 出来事の高さの中央に置く。 */
+    width: min(36%, 180px); /* 空きスペースに収まる幅にする。 */
+    height: min(100%, 180px); /* 短い段でも上下にはみ出しにくくする。 */
+    object-fit: contain; /* 元の縦横比を保つ。 */
+    image-rendering: pixelated; /* ドット絵の輪郭を保つ。 */
+    transform: translate(-50%, -50%) rotate(-8deg); /* 中心を合わせて少し傾ける。 */
+    pointer-events: none; /* 装飾が操作を妨げないようにする。 */
+  }
+
+  .story li:nth-child(even) .story-sticker {
+    left: 25%; /* 右側のカードに対して、左側の中央に置く。 */
+    transform: translate(-50%, -50%) rotate(8deg) scaleX(-1); /* 左のペンギンを反転し、中央を向かせる。 */
+  }
+}
+
+/* カードの余白・丸み・透け感・柔らかい影をここで調整する。 */
+.story-card {
+  display: flex; /* 子要素を横または縦に並べる。 */
+  align-items: flex-start; /* 子要素を交差軸方向にそろえる。 */
+  gap: 14px; /* 子要素同士の間隔を指定する。 */
+  min-width: 0; /* 要素が縮む幅の下限を指定する。 */
+  padding: 28px 34px; /* 要素の内側の余白を指定する。 */
+  border-radius: 48px; /* 角の丸みを指定する。 */
+  border: 1px solid #ffffffcc; /* 枠線の太さ、種類、色を指定する。 */
+  background: #ffffffac; /* 背景色・画像・グラデーションなどを指定する。 */
+  backdrop-filter: blur(14px); /* 要素の背後に見える背景に効果をかける。 */
+  box-shadow: 0 8px 34px #679ca42b, 0 0 32px #ffffff7a; /* 要素に影を付ける。 */
+}
+
+.story-card > span {
+  font: 600 12px/2 ui-monospace, monospace; /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  color: var(--muted); /* 文字やアイコンの色を指定する。 */
+}
+
+.story h3 {
+  font-size: clamp(18px, 2.5vw, 30px); /* 文字の大きさを指定する。 */
+  margin-bottom: 5px; /* 要素の下側の外余白を指定する。 */
+}
+
+.story p {
+  color: var(--muted); /* 補足テキストの色を指定する。 */
+  font-size: clamp(14px, 2vw, 24px); /* 画面幅に合わせて本文の大きさを調整する。 */
+}
+
+.story-photo {
+  width: min(82%, 300px); /* 写真をカードより小さくし、PCでも横幅を300pxまでに抑える。 */
+  margin: 14px 0 0; /* 写真を対応するカードの下に配置する。 */
+}
+/* 画像は枠の幅に合わせ、高さは自動で計算して元の縦横比を保つ。 */
+.story-photo img {
+  width: 100%; /* 要素の幅を指定する。 */
+  height: auto; /* 幅や内容に応じて高さを自動で決める。 */
+  border-radius: 14px; /* 角の丸みを指定する。 */
+  box-shadow: 0 10px 24px #37687526; /* 要素に影を付ける。 */
+}
+
+.story-photo figcaption {
+  margin-top: 8px; /* 要素の上側の外余白を指定する。 */
+  font-size: 12px; /* 文字の大きさを指定する。 */
+  color: var(--muted); /* 文字やアイコンの色を指定する。 */
+}
+
+.pill {
+  display: inline-flex; /* 要素の表示方法と子要素の配置方式を指定する。 */
+  gap: 28px; /* 子要素同士の間隔を指定する。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  border: 1px solid var(--line); /* 枠線の太さ、種類、色を指定する。 */
+  padding: 9px 18px; /* 要素の内側の余白を指定する。 */
+  font-size: 13px; /* 文字の大きさを指定する。 */
+}
+
+.about .pill {
+  background: #fff; /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.about .pill:hover {
+  background: var(--pale); /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.news-row {
+  background: var(--pale); /* 背景色・画像・グラデーションなどを指定する。 */
+  display: flex; /* 子要素を横または縦に並べる。 */
+  gap: 25px; /* 子要素同士の間隔を指定する。 */
+  align-items: center; /* 子要素を交差軸方向にそろえる。 */
+  padding: 13px 20px; /* 要素の内側の余白を指定する。 */
+  border-block: 1px solid var(--line); /* 上下の枠線を指定する。 */
+  font-size: 14px; /* 文字の大きさを指定する。 */
+}
+
+.news-row time, .news-row span {
+  font: 600 11px ui-monospace, monospace; /* 書体、サイズ、行の高さなどをまとめて指定する。 */
+  color: var(--muted); /* 文字やアイコンの色を指定する。 */
+}
+
+.news-row time {
+  white-space: nowrap; /* 公開日を途中で折り返さない。 */
+}
+
+.news-row:hover p {
+  text-decoration: underline; /* お知らせ全体が記事リンクだと分かるようにする。 */
+}
+
+.works {
+  background: #fff; /* 白い余白で実績の画像を引き立てる。 */
+}
+
+.works-heading {
+  display: flex; /* 見出しと紹介文を横に並べる。 */
+  justify-content: space-between; /* 見出しを左、紹介文を右に置く。 */
+  align-items: end; /* 両方の下端をそろえる。 */
+  gap: 18px; /* 見出しと紹介文の間隔。 */
+}
+
+.works-heading > p {
+  color: var(--muted); /* 紹介文の文字色。 */
+  font-size: 14px; /* 紹介文の文字サイズ。 */
+}
+
+.work-grid {
+  display: grid; /* 先頭に横長の実績、続いて2列の実績を並べる。 */
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2列を等幅にする。 */
+  gap: 34px 24px; /* カード間の縦・横の余白。 */
+}
+
+.work-card:first-child {
+  grid-column: 1 / -1; /* 最初の実績をグリッド全幅にする。 */
+}
+
+.work-card {
+  width: 100%; /* 列の幅いっぱいに表示する。 */
+  padding: 0; /* ボタン既定の内側の余白をなくす。 */
+  border: 0; /* ボタン既定の枠をなくす。 */
+  background: none; /* カードをセクションの白地になじませる。 */
+  color: inherit; /* セクションの文字色を使う。 */
+  font: inherit; /* サイトと同じ書体を使う。 */
+  text-align: left; /* 見出しを左にそろえる。 */
+  cursor: pointer; /* カードを開けることを示す。 */
+}
+
+.work-cover {
+  display: block; /* 写真・図版の表示枠を作る。 */
+  aspect-ratio: 16 / 9; /* 一覧の画像の高さをそろえる。 */
+  overflow: hidden; /* 拡大した画像を枠内に収める。 */
+  background: var(--blue); /* 図版の背景にサイトの水色を使う。 */
+}
+
+.work-card:first-child .work-cover {
+  aspect-ratio: 2.4; /* 最初の画像を横長に見せる。 */
+}
+
+.work-cover img {
+  width: 100%; /* 枠の横幅に合わせる。 */
+  height: 100%; /* 枠の高さに合わせる。 */
+  object-fit: cover; /* 写真を変形させず、枠に合わせて切り抜く。 */
+  transition: transform .3s ease; /* カーソルを合わせたときの拡大を滑らかにする。 */
+}
+
+.work-card:hover img {
+  transform: scale(1.035); /* 画像をわずかに拡大する。 */
+}
+
+.work-card-heading {
+  display: flex; /* 実績のタイトルと矢印を左右に並べる。 */
+  justify-content: space-between; /* 矢印をカードの右側に置く。 */
+  gap: 12px; /* タイトルと矢印の間隔。 */
+  margin-top: 12px; /* 画像とタイトルの間隔。 */
+  font-size: clamp(17px, 2vw, 25px); /* 画面幅に合わせたタイトルサイズ。 */
+  font-weight: 700; /* タイトルを太字で表示する。 */
+  line-height: 1.45; /* 複数行のタイトルを読みやすくする。 */
+}
+
+.work-card:hover .work-card-heading > span:first-child {
+  text-decoration: underline; /* 開ける実績のタイトルを強調する。 */
+}
+
+.work-arrow {
+  color: var(--muted); /* 矢印を控えめな色にする。 */
+}
+
+.work-caption {
+  display: block; /* タイトルの下にプロジェクト名を置く。 */
+  margin-top: 6px; /* タイトルとの間隔。 */
+  color: var(--muted); /* 補足情報の文字色。 */
+  font-size: 13px; /* 補足情報の文字サイズ。 */
+}
+
+.work-graphic {
+  display: grid; /* 写真がない実績は文字を使った図版にする。 */
+  height: 100%; /* 画像枠の全体を使う。 */
+  padding: clamp(16px, 3vw, 40px); /* 図版の内側の余白。 */
+  align-content: center; /* 図版の文字を縦方向の中央にそろえる。 */
+  background: linear-gradient(130deg, var(--blue), var(--pale)); /* 青系のグラデーション。 */
+}
+
+.work-graphic strong {
+  font-size: clamp(24px, 4vw, 50px); /* 図版の名前を大きく表示する。 */
+}
+
+.work-dialog {
+  width: min(760px, calc(100% - 28px)); /* 小さい画面にも収まるよう左右に余白を取る。 */
+  max-height: min(88dvh, 900px); /* 詳細が長い場合はポップアップ内でスクロールする。 */
+  padding: 0; /* 余白は内側のパネルで管理する。 */
+  border: 0; /* ブラウザ既定の枠線をなくす。 */
+  border-radius: 18px; /* パネルの角を丸くする。 */
+  color: var(--ink); /* 本文の文字色。 */
+  box-shadow: 0 18px 64px #15343d52; /* 詳細が画面手前に浮いて見えるようにする。 */
+}
+
+.work-dialog::backdrop {
+  background: #102a36a8; /* 背景を暗くして詳細を目立たせる。 */
+}
+
+.work-dialog[open] {
+  animation: work-open .24s ease-out; /* ポップアップを少し下から浮かび上がらせる。 */
+}
+
+.work-dialog-panel {
+  position: relative; /* 閉じるボタンの配置基準にする。 */
+  padding: clamp(20px, 4vw, 42px); /* 詳細の内側の余白。 */
+}
+
+.work-dialog h3 {
+  margin: 8px 42px 18px 0; /* 閉じるボタンと見出しが重ならないようにする。 */
+  font-size: clamp(21px, 3.5vw, 34px); /* 詳細見出しを画面幅に合わせる。 */
+  line-height: 1.35; /* 詳細見出しの行間。 */
+}
+
+.work-dialog .work-cover img {
+  object-fit: contain; /* 詳細では写真全体を表示する。 */
+}
+
+.work-description {
+  margin-top: 18px; /* 画像と詳細本文の間隔。 */
+}
+
+.work-description p + p {
+  margin-top: 12px; /* 段落同士の間隔。 */
+}
+
+.work-close {
+  position: absolute; /* パネル右上に配置する。 */
+  inset: 12px 12px auto auto; /* パネル右上からの距離。 */
+  width: 40px; /* 閉じるボタンの幅。 */
+  height: 40px; /* 閉じるボタンの高さ。 */
+  border: 0; /* ボタン既定の枠をなくす。 */
+  border-radius: 50%; /* 丸いボタンにする。 */
+  background: var(--blue); /* サイトの水色を使う。 */
+  color: var(--ink); /* 閉じる記号の色。 */
+  font: 24px/1 sans-serif; /* 閉じる記号のサイズ。 */
+  cursor: pointer; /* クリック可能であることを示す。 */
+}
+
+.work-card:focus-visible, .work-close:focus-visible {
+  outline: 2px solid #29677a; /* キーボードで選択中のボタンを示す。 */
+  outline-offset: 4px; /* ボタンと輪郭線の間隔。 */
+}
+
+html:has(.work-dialog[open]) {
+  overflow: hidden; /* 詳細を表示している間は背景のスクロールを止める。 */
+}
+
+@keyframes work-open {
+  from {
+    opacity: 0; /* 透明な状態から始める。 */
+    transform: translateY(12px); /* 少し下から始める。 */
+  }
+}
+
+@media (max-width: 600px) {
+  .works-heading {
+    display: block; /* スマホでは見出しと紹介文を縦に並べる。 */
+  }
+
+  .works-heading > p {
+    margin-top: 12px; /* 紹介文と見出しの間隔。 */
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr; /* スマホでは実績を1列に並べる。 */
+  }
+
+  .work-card:first-child .work-cover {
+    aspect-ratio: 16 / 9; /* スマホでは先頭の実績もほかの写真と同じ比率にする。 */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-dialog[open] {
+    animation: none; /* 動きを減らす設定では詳細をすぐに表示する。 */
+  }
+
+  .work-cover img {
+    transition: none; /* 写真の拡大をアニメーションさせない。 */
+  }
+}
+
+.members {
+  background: var(--blue); /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.member-grid {
+  display: grid; /* 子要素を行と列で配置する。 */
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* グリッドの列数と各列の幅を指定する。 */
+  gap: 20px; /* 子要素同士の間隔を指定する。 */
+}
+
+.member {
+  overflow: hidden; /* 枠からはみ出す部分を隠す。 */
+  border: 1px solid var(--line); /* 枠線の太さ、種類、色を指定する。 */
+  border-radius: 18px; /* 角の丸みを指定する。 */
+  background: #fff; /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.photo {
+  display: grid; /* 子要素を行と列で配置する。 */
+  justify-items: center; /* グリッド内で各項目の行方向のそろえ方を指定する。 */
+  align-content: center; /* 複数行・列を交差軸方向に配置する。 */
+  gap: 9px; /* 子要素同士の間隔を指定する。 */
+  aspect-ratio: 4 / 3; /* 要素の幅と高さの比率を指定する。 */
+  background: var(--pale); /* 背景色・画像・グラデーションなどを指定する。 */
+  color: var(--muted); /* 文字やアイコンの色を指定する。 */
+  font-size: 12px; /* 文字の大きさを指定する。 */
+  overflow: hidden; /* 枠からはみ出す部分を隠す。 */
+}
+
+.photo img {
+  width: 100%; /* 要素の幅を指定する。 */
+  height: 100%; /* 要素の高さを指定する。 */
+  object-fit: cover; /* 画像を表示枠にどう収めるか指定する。 */
+}
+
+.photo-icon {
+  position: relative; /* 通常の配置を保ち、絶対配置の子要素の基準にする。 */
+  display: block; /* 要素を独立したブロックとして表示する。 */
+  width: 36px; /* 要素の幅を指定する。 */
+  height: 32px; /* 要素の高さを指定する。 */
+}
+
+.photo-icon::before, .photo-icon::after {
+  content: ""; /* 装飾用の空の疑似要素を作る。 */
+  position: absolute; /* 通常の並びから外して基準位置から配置する。 */
+  left: 50%; /* 左端からの位置を指定する。 */
+  transform: translateX(-50%); /* 移動、回転、拡大縮小などを適用する。 */
+  background: var(--line); /* 背景色・画像・グラデーションなどを指定する。 */
+}
+
+.photo-icon::before {
+  width: 12px; /* 要素の幅を指定する。 */
+  height: 12px; /* 要素の高さを指定する。 */
+  border-radius: 50%; /* 角の丸みを指定する。 */
+}
+
+.photo-icon::after {
+  width: 27px; /* 要素の幅を指定する。 */
+  height: 15px; /* 要素の高さを指定する。 */
+  bottom: 0; /* 下端からの位置を指定する。 */
+  border-radius: 14px 14px 3px 3px; /* 角の丸みを指定する。 */
+}
+
+.member-info {
+  padding: 18px; /* 要素の内側の余白を指定する。 */
+  overflow-wrap: anywhere; /* 長い文字列の途中で改行できるようにする。 */
+}
+
+.member h3 {
+  margin-top: 4px; /* 要素の上側の外余白を指定する。 */
+  font-size: 17px; /* 文字の大きさを指定する。 */
+}
+
+.role {
+  font-size: 13px; /* 文字の大きさを指定する。 */
+  color: var(--muted); /* 文字やアイコンの色を指定する。 */
+}
+
+.instagram {
+  color: #FFF;/*文字・アイコン色*/
+  border-radius: 7px;/*角丸に*/
+  position: relative;
+  display: inline-block;
+  height: 25px;/*高さ*/
+  width: 75px;/*幅*/
+  text-align: center;/*中身を中央寄せ*/
+  margin-top: 10px; /* 要素の上側の外余白を指定する。 */
+  font-size: 12px; /* 文字の大きさを指定する。 */
+  line-height: 25px;/*高さと合わせる*/
+  font-weight: 600; /* 文字の太さを指定する。 */
+
+  background: linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;/*グラデーション①*/
+  overflow: hidden;/*はみ出た部分を隠す*/
+  text-decoration:none;/*下線は消す*/
+}
+
+.instagram::before{/*グラデーション②*/
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;/*全体を覆う*/
+  height: 100%;/*全体を覆う*/
+
+  background: linear-gradient(15deg, #ffdb2c, rgb(249, 118, 76) 25%, rgba(255, 77, 64, 0) 50%) no-repeat;
+}
+
+.instagram span {
+  margin-left: 1px; /* 要素の左側の外余白を指定する。 */
+  font-weight: 100; /* 文字の太さを指定する。 */
+  color: #FFF; /* 文字やアイコンの色を指定する。 */
+  
+  display:inline-block;
+  position: relative;
+  transition: transform .5s;
+}
+
+.instagram:focus-visible { outline: 3px solid #333; outline-offset: 4px; }
+
+.comment {
+  margin-top: 12px; /* 要素の上側の外余白を指定する。 */
+  padding-top: 12px; /* 要素の上側の内余白を指定する。 */
+  border-top: 1px solid var(--line); /* 上側の枠線を指定する。 */
+  font-size: 13px; /* 文字の大きさを指定する。 */
+}
+
+.comment span {
+  display: block; /* 要素を独立したブロックとして表示する。 */
+  color: var(--muted); /* 文字やアイコンの色を指定する。 */
+  font-size: 11px; /* 文字の大きさを指定する。 */
+}
+
+footer {
+  padding-block: 24px; /* 要素の上下の内余白を指定する。 */
+  background: #fff; /* 背景色・画像・グラデーションなどを指定する。 */
+  color: var(--muted); /* 文字やアイコンの色を指定する。 */
+  font-size: 12px; /* 文字の大きさを指定する。 */
+}
+
+footer img {
+  width: 115px; /* 要素の幅を指定する。 */
+}
+
+@media (max-width: 800px) {
+  .shell {
+    width: calc(100% - 44px); /* 要素の幅を指定する。 */
+  }
+  .member-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* グリッドの列数と各列の幅を指定する。 */
+  }
+  /* タブレット幅ではカード内の余白を詰める。 */
+  .story-card {
+    padding: 23px 25px; /* 要素の内側の余白を指定する。 */
+  }
+}
+
+@media (max-width: 500px) {
+  .shell {
+    width: calc(100% - 32px); /* 要素の幅を指定する。 */
+  }
+  .header {
+    padding-block: 14px; /* 要素の上下の内余白を指定する。 */
+  }
+  .header .nav {
+    flex-wrap: wrap; /* 子要素の折り返しを指定する。 */
+    gap: 12px; /* 子要素同士の間隔を指定する。 */
+  }
+  .header img {
+    width: 120px; /* 要素の幅を指定する。 */
+  }
+  nav {
+    flex-wrap: wrap; /* 子要素の折り返しを指定する。 */
+    gap: 5px; /* 子要素同士の間隔を指定する。 */
+  }
+  nav a {
+    padding: 4px 10px; /* 要素の内側の余白を指定する。 */
+    font-size: 11px; /* 文字の大きさを指定する。 */
+  }
+  .hero h1 {
+    font-size: clamp(32px, 10vw, 46px); /* 文字の大きさを指定する。 */
+  }
+  .hero-copy p {
+    font-size: 12px; /* 文字の大きさを指定する。 */
+  }
+  .section {
+    padding: 50px 0; /* 要素の内側の余白を指定する。 */
+  }
+  .member-grid {
+    gap: 10px; /* 子要素同士の間隔を指定する。 */
+  }
+  .member-info {
+    padding: 12px; /* 要素の内側の余白を指定する。 */
+  }
+  .member h3 {
+    font-size: 15px; /* 文字の大きさを指定する。 */
+  }
+  footer .nav {
+    flex-wrap: wrap; /* 子要素の折り返しを指定する。 */
+  }
+}
+
+/* MESSAGE：右の写真に、左から一言メッセージを重ねる。 */
+.leader-feature {
+  display: grid; /* 紹介文と写真を横に並べる。 */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); /* 写真側を広く取る。 */
+  align-items: center; /* 紹介文を写真の高さの中央に置く。 */
+  gap: clamp(22px, 5vw, 66px); /* 紹介文と写真の間隔。 */
+  padding: clamp(22px, 5vw, 58px); /* MESSAGE欄の内余白。 */
+  background: var(--pale); /* 写真と文字を引き立てる淡い水色。 */
+}
+
+.leader-photo {
+  position: relative; /* 一言メッセージを重ねる基準にする。 */
+  grid-area: 1 / 2; /* PCでは写真を右に置く。 */
+  width: min(100%, 370px); /* 縦長の写真が大きくなりすぎないようにする。 */
+  justify-self: center; /* 右側の列で写真を中央に置く。 */
+}
+
+.leader-photo img,
+.representative-photo img {
+  width: 100%; /* 写真を枠の幅に合わせる。 */
+  height: auto; /* 元の縦横比で写真全体を表示する。 */
+}
+
+.leader-photo img {
+  box-shadow: 12px 12px 0 var(--line); /* 写真の右下に水色の台紙を重ねる。 */
+}
+
+.leader-copy {
+  grid-area: 1 / 1; /* PCでは名前とリンクを左に置く。 */
+}
+
+.leader-copy .kicker {
+  margin-bottom: 22px; /* MESSAGEのラベルと名前の間に余白を取る。 */
+}
+
+.leader-copy h3 {
+  font-size: clamp(26px, 4vw, 46px); /* 代表の名前を大きく見せる。 */
+  line-height: 1.3; /* 名前の行間。 */
+}
+
+.leader-copy .pill {
+  margin-top: 24px; /* 名前とプロフィールリンクの間隔。 */
+}
+
+.leader-tagline {
+  display: grid; /* 一言を1行ずつ帯に分ける。 */
+  justify-items: start; /* 帯の左端をそろえる。 */
+  gap: 3px; /* 帯と帯の間を3px空ける。 */
+  position: absolute; /* 一言を写真に重ねる。 */
+  bottom: 14%; /* 文章が折り返しても写真の下端からはみ出しにくくする。 */
+  left: -14%; /* 帯が写真の左端をまたぐようにする。 */
+  max-width: 108%; /* 長いメッセージは写真の近くで折り返す。 */
+  color: #fff; /* 濃色の帯に白い文字を載せる。 */
+  font-size: clamp(15px, 2.1vw, 24px); /* メッセージが帯に収まるよう画面幅に合わせる。 */
+  font-weight: 700; /* メッセージを太字にする。 */
+  line-height: 1.35; /* メッセージが複数行になったときの間隔。 */
+  overflow-wrap: anywhere; /* 長い文字列が帯からはみ出さないようにする。 */
+}
+
+.leader-tagline > span {
+  padding: .12em .42em; /* 文字と帯の端の間に余白を取る。 */
+  background: #10000ba8; /* 各行に独立した濃色の帯を付ける。 */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leader-photo.is-visible img {
+    animation: leader-photo-enter .8s cubic-bezier(.2, .7, .3, 1) both; /* 写真が画面に入ったときに一度だけ再生する。 */
+  }
+}
+
+@keyframes leader-photo-enter {
+  from {
+    opacity: 0; /* 写真を透明な状態から表示する。 */
+    transform: translate(14px, 18px); /* 写真を右下から少し滑らせる。 */
+  }
+
+  to {
+    opacity: 1; /* 写真を通常の濃さに戻す。 */
+    transform: translate(0, 0); /* 写真を最終位置に置く。 */
+  }
+}
+
+.members .member-grid--compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* ほかの3人を横一列に並べる。 */
+  max-width: 690px; /* 代表のカードより小さい範囲に収める。 */
+  margin: 24px auto 0; /* 代表の下に間隔を空けて中央に置く。 */
+}
+
+.member-grid--compact .member {
+  padding-top: 14px; /* 円形の写真とカードの上端に間隔を取る。 */
+  text-align: center; /* 写真の下の名前と役職を中央にそろえる。 */
+}
+
+
+.member-grid--compact .photo {
+  width: min(75%, 90px); /* ほかのメンバーの写真を小さく表示する。 */
+  aspect-ratio: 1; /* 円形の写真枠にする。 */
+  margin-inline: auto; /* 写真をカードの中央に置く。 */
+  border-radius: 50%; /* 正方形の枠を丸くする。 */
+}
+
+.representative-hero {
+  padding-block: clamp(28px, 5vw, 66px); /* プロフィールの冒頭に余白を取る。 */
+  background: var(--pale); /* 専用ページにもサイトの水色を使う。 */
+}
+
+.representative-back {
+  display: inline-block; /* 戻るリンクと見出しの間に余白を取れるようにする。 */
+  margin-bottom: 24px; /* 戻るリンクの下側の余白。 */
+  font-size: 14px; /* 戻るリンクの文字サイズ。 */
+  text-decoration: underline; /* リンクだと分かるようにする。 */
+}
+
+.representative-intro {
+  display: grid; /* メッセージとポートレートを並べる。 */
+  grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); /* メッセージ側を少し広くする。 */
+  align-items: center; /* 両方の中心をそろえる。 */
+  gap: clamp(24px, 6vw, 80px); /* メッセージと写真の間隔。 */
+}
+
+.representative-intro h1 {
+  margin: 14px 0 28px; /* ラベルと名前の間に余白を取る。 */
+  font-size: clamp(38px, 7vw, 88px); /* 専用ページのメッセージを大きく見せる。 */
+  line-height: 1.16; /* 見出しの2行を近づける。 */
+}
+
+.representative-photo {
+  max-width: 440px; /* 大きい画面でも写真の幅を抑える。 */
+}
+
+.representative-role {
+  color: var(--muted); /* 役職を補足色で表示する。 */
+  font-size: 25px; /* 役職を名前より小さく表示する。 */
+  font-weight: 100;
+}
+span.marker {
+    background-color: rgba(122, 112, 255, 0.266);
+}
+
+.representative-name {
+  font-size: clamp(22px, 4vw, 36px); /* 代表の名前を読みやすくする。 */
+  font-weight: 700; /* 代表の名前を太字にする。 */
+}
+
+.representative-body .shell {
+  max-width: 760px; /* 本文の1行が長くなりすぎないようにする。 */
+}
+
+.representative-body .shell > p {
+  margin-bottom: 18px; /* プロフィール本文の段落間隔。 */
+}
+
+
+
+@media (max-width: 620px) {
+  .leader-feature,
+  .representative-intro {
+    grid-template-columns: 1fr; /* スマホでは写真と文章を縦に並べる。 */
+  }
+
+  .leader-photo {
+    grid-area: 1 / 1; /* スマホでは写真を上に置く。 */
+    max-width: 290px; /* 縦長の写真をスマホに収める。 */
+  }
+
+  .leader-copy {
+    grid-area: 2 / 1; /* 写真の下に名前とリンクを置く。 */
+  }
+
+  .leader-tagline {
+    left: 10px; /* スマホでは帯の左端を写真の内側に入れる。 */
+    max-width: calc(100% - 20px); /* 帯が写真の横幅を超えないようにする。 */
+    font-size: clamp(12px, 3.65vw, 19px); /* スマホでも文章を収める。 */
+  }
+
+  .representative-photo {
+    width: min(100%, 340px); /* スマホでポートレートを画面幅に収める。 */
+  }
+
+  .member-grid--compact .member-info {
+    padding: 8px; /* 3人分を横に収めるため内側の余白を詰める。 */
+  }
+
+  .member-grid--compact .member h3 {
+    font-size: 13px; /* 小さなカードでも名前が読めるサイズにする。 */
+  }
+
+  .member-grid--compact .kicker {
+    letter-spacing: .02em; /* 小さなカードの番号が収まるようにする。 */
+  }
+}
+
+/* ペンギン素材はドットの輪郭を保ち、シールのように配置する。 */
+.hero-inner {
+  position: relative; /* ペンギンをヒーローの右側に置く基準。 */
+  overflow: clip; /* 入場前の画像で横スクロールが出ないようにする。 */
+}
+
+.penguin-frames {
+  --penguin-inset: clamp(22px, 6vw, 86px); /* スマホで止まる位置と右端の間隔。 */
+  width: clamp(110px, 16vw, 195px); /* 画面の広さに合わせてシールのサイズを調整する。 */
+  align-self: flex-end; /* 狭い画面ではキャッチコピーの下の右側に置く。 */
+  margin-right: var(--penguin-inset); /* 右端とシールの間に余白を取る。 */
+  image-rendering: pixelated; /* 拡大してもドット絵をなめらかにぼかさない。 */
+  pointer-events: none; /* 装飾がリンクの操作を妨げないようにする。 */
+}
+
+.penguin-frames img {
+  width: 100%; /* 画像をシールの枠幅に合わせる。 */
+  height: auto; /* 元の縦横比を保つ。 */
+}
+
+
+@media (min-width: 1000px) {
+  .penguin-frames {
+    position: absolute; /* 広い画面ではキャッチコピーの横に置く。 */
+    --penguin-inset: max(24px, calc((100vw - 1120px) / 2)); /* PCで止まる位置と右端の間隔。 */
+    right: var(--penguin-inset); /* 本文の右端に合わせる。 */
+    top: 50%; /* ヒーローの高さの中央に置く。 */
+    margin-right: 0; /* 右端の位置は right で指定する。 */
+    transform: translateY(-50%); /* シール自身の中心を高さの中央に合わせる。 */
+  }
+}
+
+.penguin-sticker {
+  display: inline-block; /* 見出しの隣にシールを添える。 */
+  width: clamp(32px, 5vw, 60px); /* 文字より目立ちすぎないサイズにする。 */
+  height: auto; /* 画像の比率を保つ。 */
+  margin-inline-start: .3em; /* 見出しとシールの間隔。 */
+  vertical-align: middle; /* 見出しの縦方向の中心にそろえる。 */
+  image-rendering: pixelated; /* ドット絵の輪郭をそのまま表示する。 */
+}
+
+.about-sticker-heading {
+  position: relative; /* 3羽の画像を自由配置する基準。 */
+  align-items: start; /* 見出しの背景を文字に必要な高さに保つ。 */
+  padding-bottom: clamp(112px, calc(24vw + 26px), 166px); /* 狭い画面では見出しの下にペンギンの場所を確保する。 */
+}
+
+.about-penguin {
+  position: absolute; /* 各ペンギンの位置を個別に指定する。 */
+  width: clamp(82px, 24vw, 140px); /* スマホでも以前より大きく見せる。 */
+  height: auto; /* 元の画像の比率を保つ。 */
+  image-rendering: pixelated; /* 拡大してもドットの輪郭を保つ。 */
+  pointer-events: none; /* 装飾が操作を妨げないようにする。 */
+}
+
+.about-penguin--stand {
+  left: 0; /* 立っているペンギンは左側に置く。 */
+  bottom: 3px; /* 見出しより下に置く。 */
+  transform: rotate(-8deg); /* シールを少し斜めに貼ったように見せる。 */
+}
+
+.about-penguin--nervous {
+  left: 35%; /* 真ん中のペンギンを少し右にずらす。 */
+  bottom: 14px; /* ほかのペンギンと高さをずらす。 */
+  transform: rotate(8deg); /* 立ち姿と逆向きに傾ける。 */
+}
+
+.about-penguin--dive {
+  right: 1%; /* 飛び込むペンギンは右に置く。 */
+  bottom: 0; /* 見出し下の余白に収める。 */
+  transform: rotate(-7deg); /* 斜めに飛び込む姿を強調する。 */
+}
+
+@media (min-width: 850px) {
+  .about-sticker-heading {
+    min-height: clamp(228px, 26vw, 310px); /* 3羽の高さに合わせて見出し周りを広げる。 */
+    padding-bottom: 0; /* 写真を見出しの横に並べる。 */
+  }
+
+  .about-penguin {
+    width: clamp(150px, 17vw, 220px); /* PCではシールを大きく見せる。 */
+  }
+
+  .about-penguin--stand {
+    top: 10px; /* 左上に置く。 */
+    bottom: auto; /* 上からの位置を優先する。 */
+  }
+
+  .about-penguin--nervous {
+    top: 64px; /* 3羽の中で一番下に置く。 */
+    left: 19%; /* 左のペンギンとの間隔。 */
+    bottom: auto; /* 上からの位置を優先する。 */
+  }
+
+  .about-penguin--dive {
+    top: 0; /* 右上寄りに置く。 */
+    left: 38%; /* 見出しの左側に収める。 */
+    right: auto; /* 左からの位置を優先する。 */
+    bottom: auto; /* 上からの位置を優先する。 */
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .penguin-frames.is-playing img {
+    animation: penguin-walk-in 2s steps(1, end) both; /* 各コマで位置と傾きを同時に切り替える。 */
+    transform-origin: center bottom; /* 足元を支点に傾ける。 */
+  }
+}
+
+@media (min-width: 1000px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .penguin-frames {
+    pointer-events: auto; /* PCでマウスを重ねられるようにする。 */
+  }
+
+  .penguin-frames.is-playing:hover img {
+    animation: penguin-walk-in 2s steps(1, end) both, penguin-hop .26s steps(1, end); /* 入場と独立して、小さく一度だけ跳ねる。 */
+  }
+}
+
+@keyframes penguin-hop {
+  0%, 100% {
+    translate: 0 0; /* 元の高さに戻る。 */
+  }
+
+  50% {
+    translate: 0 -8px; /* 8px上へピコッと跳ねる。 */
+  }
+}
+
+@keyframes penguin-walk-in {
+  0% {
+    transform: translate(calc(100% + var(--penguin-inset) + 12px), -70px) rotate(0); /* 画面の右外で待機する。 */
+  }
+
+  18% {
+    transform: translate(calc((100% + var(--penguin-inset) + 12px) * .8), -56px) rotate(-9deg); /* 1歩目は左へ傾く。 */
+  }
+
+  36% {
+    transform: translate(calc((100% + var(--penguin-inset) + 12px) * .6), -42px) rotate(9deg); /* 2歩目は右へ傾く。 */
+  }
+
+  54% {
+    transform: translate(calc((100% + var(--penguin-inset) + 12px) * .4), -28px) rotate(-9deg); /* 3歩目は左へ傾く。 */
+  }
+
+  72% {
+    transform: translate(calc((100% + var(--penguin-inset) + 12px) * .2), -14px) rotate(9deg); /* 4歩目は右へ傾く。 */
+  }
+
+  90% {
+    transform: translate(0, 0) rotate(-9deg); /* 5歩目で定位置に着く。 */
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0); /* 足を止めてまっすぐ立つ。 */
+  }
+}
